@@ -12,11 +12,11 @@ module.exports = {
     colors: {
       // Custom color palette
       bg: "#101010",
-      "bg-100": "#191919",
+      "bg-100": "#222222",
       "bg-200": "#3D3D3D",
       ink: "#FCFCFC",
       "ink-100": "#AFAFAF",
-      "ink-200": "#585858",
+      "ink-200": "#777777",
 
       // Keep transparent and current for utilities
       transparent: "transparent",

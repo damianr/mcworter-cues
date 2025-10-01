@@ -1,60 +1,41 @@
 <template>
   <div
-    class="max-w-screen-2xl min-h-screen pt-[160px] mx-auto border-x border-[#191919] shadow-xl shadow-[#080808]/60"
+    class="max-w-screen-2xl min-h-screen pt-[120px] md:pt-[160px] mx-auto border-x-0 md:border-x border-[#191919] md:shadow-xl md:shadow-[#080808]/60"
   >
-    <div class="px-24 py-16">
-      <!-- About Section -->
-      <div class="p-12 border border-bg-200">
-        <div class="flex gap-8 items-start">
-          <!-- Jerry's Image -->
-          <div class="flex-shrink-0">
-            <NuxtImg
-              src="/images/jerry.jpg"
-              alt="Jerry McWorter"
-              class="h-full object-cover rounded-lg"
-              loading="lazy"
-            />
-          </div>
+    <div class="px-4 md:px-24 py-8 md:py-16">
+      <!-- Biography -->
+      <div class="p-6 md:p-12 border border-bg-200">
+        <div class="text-ink-100 leading-relaxed space-y-6 md:space-y-8 text-sm md:text-base">
+          <!-- Claims to Fame with Image -->
+          <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+            <!-- Jerry's Image -->
+            <div class="flex-shrink-0 flex justify-center md:justify-start">
+              <NuxtImg
+                src="/images/jerry.jpg"
+                alt="Jerry McWorter"
+                class="w-64 h-64 object-cover rounded-lg aspect-square"
+                loading="lazy"
+              />
+            </div>
 
-          <!-- Content -->
-          <div class="flex-1 text-ink">
-            <h1 class="mb-4">About Jerry McWorter</h1>
-            <div class="text-ink-100 leading-relaxed space-y-4">
-              <p>
-                For over two decades, Jerry has been crafting precision instruments that represent
-                the pinnacle of billiards excellence. Each cue is meticulously designed and
-                handcrafted to deliver unparalleled performance and timeless elegance.
-              </p>
-              <p>
-                Our commitment to quality begins with the careful selection of premium materials and
-                extends through every aspect of the manufacturing process. From the initial design
-                concept to the final finishing touches, every Jerry McWorter cue embodies our
-                dedication to perfection.
-              </p>
+            <!-- Claims to Fame Content -->
+            <div class="space-y-3 md:space-y-4 flex-1">
+              <h2 class="text-xl md:text-2xl font-semibold text-ink">Claims to Fame</h2>
+              <ul class="space-y-2">
+                <li>• American Cuemakers Association Board of Directors: 1996-1998</li>
+                <li>• American Cuemakers Association President: 1998-2000</li>
+                <li>• Co-Producer of the prestigious Gallery of American Cue Art</li>
+                <li>• Winner of the Best of Show Award for the "Ebony Jewel" cue 1999</li>
+                <li>
+                  • Billiards technical director and advisor for commercials, TV shows and feature
+                  films
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Detailed Biography -->
-      <div class="mt-12 p-12 border border-bg-200">
-        <div class="text-ink-100 leading-relaxed space-y-8 max-w-4xl">
-          <div class="space-y-4">
-            <h2 class="text-2xl font-semibold text-ink">Claims to Fame</h2>
-            <ul class="space-y-2">
-              <li>• American Cuemakers Association Board of Directors: 1996-1998</li>
-              <li>• American Cuemakers Association President: 1998-2000</li>
-              <li>• Co-Producer of the prestigious Gallery of American Cue Art</li>
-              <li>• Winner of the Best of Show Award for the "Ebony Jewel" cue 1999</li>
-              <li>
-                • Billiards technical director and advisor for commercials, TV shows and feature
-                films
-              </li>
-            </ul>
-          </div>
-
-          <div class="space-y-4">
-            <h2 class="text-2xl font-semibold text-ink">Early Life & Magic</h2>
+          <div class="space-y-3 md:space-y-4">
+            <h2 class="text-xl md:text-2xl font-semibold text-ink">Early Life & Magic</h2>
             <p>
               Born in Glendale, California, Jerry grew up in La Crescenta. At age 13, Mormon
               missionaries staying in the family guesthouse showed him a card trick. When he asked
@@ -70,8 +51,8 @@
             </p>
           </div>
 
-          <div class="space-y-4">
-            <h2 class="text-2xl font-semibold text-ink">Pool & First Cue</h2>
+          <div class="space-y-3 md:space-y-4">
+            <h2 class="text-xl md:text-2xl font-semibold text-ink">Pool & First Cue</h2>
             <p>
               In 1982, when Jerry was 17, fellow magician and pool player Dean Dill introduced him
               to pool for money. Jerry quickly learned the basics and began seeing local greats like
@@ -84,8 +65,10 @@
             </p>
           </div>
 
-          <div class="space-y-4">
-            <h2 class="text-2xl font-semibold text-ink">Birth of McWorter Custom Cues</h2>
+          <div class="space-y-3 md:space-y-4">
+            <h2 class="text-xl md:text-2xl font-semibold text-ink">
+              Birth of McWorter Custom Cues
+            </h2>
             <p>
               After returning from a Mormon mission (1983-1985) and facing California's construction
               industry downturn, Jerry saw the need for simple, affordable player-style cues. When
@@ -98,8 +81,8 @@
             </p>
           </div>
 
-          <div class="space-y-4">
-            <h2 class="text-2xl font-semibold text-ink">Evolution & Recognition</h2>
+          <div class="space-y-3 md:space-y-4">
+            <h2 class="text-xl md:text-2xl font-semibold text-ink">Evolution & Recognition</h2>
             <p>
               "I made a lot of ugly cues in the early days," Jerry admits, "but they played good!
               One of my smarter business moves was not putting my name on those early ones."
@@ -111,8 +94,10 @@
             </p>
           </div>
 
-          <div class="space-y-4">
-            <h2 class="text-2xl font-semibold text-ink">The Gallery of American Cue Art</h2>
+          <div class="space-y-3 md:space-y-4">
+            <h2 class="text-xl md:text-2xl font-semibold text-ink">
+              The Gallery of American Cue Art
+            </h2>
             <p>
               In 1995, Jerry joined with Thomas Wayne and Chuck Montique to produce the "Showcase of
               American Cue Art" (later "The Gallery of American Cue Art"). This unique concept
@@ -121,8 +106,8 @@
             </p>
           </div>
 
-          <div class="border-t border-ink-100/20 pt-6 mt-8">
-            <p class="text-ink-200 font-mono text-sm text-center">
+          <div class="border-t border-ink-100/20 pt-6 mt-6 md:mt-8">
+            <p class="text-ink-200 font-mono text-xs md:text-sm text-center">
               Timeless performance. Uncompromising quality.
             </p>
           </div>

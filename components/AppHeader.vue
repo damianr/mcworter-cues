@@ -1,12 +1,12 @@
 <template>
   <header
     v-if="!isCueDetailPage"
-    class="fixed top-0 left-0 right-0 z-50 transition-all duration-100"
+    class="fixed top-0 w-full max-w-[1400px] z-50 transition-all duration-100"
     :class="{ 'border-b border-[#191919] bg-bg/80 backdrop-blur-md': isScrolled }"
   >
     <div
-      class="max-w-screen-xl mx-auto px-12 transition-all duration-100"
-      :class="{ 'py-3': isScrolled, 'py-8': !isScrolled }"
+      class="max-w-screen-xl mx-auto px-4 md:px-12 transition-all duration-100"
+      :class="{ 'py-3': isScrolled, 'py-6 md:py-8': !isScrolled }"
     >
       <div class="flex items-center justify-between">
         <!-- Logo Section -->
@@ -38,7 +38,7 @@
         </NuxtLink>
 
         <!-- Navigation -->
-        <nav class="flex items-center gap-8">
+        <nav class="hidden md:flex items-center gap-8">
           <NuxtLink
             to="/"
             class="text-ink-100 hover:text-ink transition-colors"
