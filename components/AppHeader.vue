@@ -5,7 +5,7 @@
     :class="{ 'border-b border-[#191919] bg-bg/80 backdrop-blur-md': isScrolled }"
   >
     <div
-      class="max-w-screen-xl mx-auto px-4 md:px-12 transition-all duration-100"
+      class="px-4 md:px-12 transition-all duration-100"
       :class="{ 'py-3': isScrolled, 'py-6 md:py-8': !isScrolled }"
     >
       <div class="flex items-center justify-between">
