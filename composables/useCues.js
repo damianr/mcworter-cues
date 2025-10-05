@@ -1,75 +1,64 @@
 export default function useCues() {
   const cues = ref([
     {
-      id: 1758,
-      title: "Six pointer",
+      id: 202,
+      title: "20th Anniversary",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      section: "one",
+      images: {
+        1: "/images/202/1.png",
+        2: "/images/202/2.png",
+        3: "/images/202/3.png",
+      },
+    },
+    {
+      id: 2335,
+      title: "Florentine",
       description:
         "The Player Six Pointer is a unique cue that is a hybrid of the Player Six and the Player Eight. It is a great cue for players who are looking to improve their game.",
       section: "one",
       images: {
-        1: "/images/1758/1.png",
-        2: "/images/1758/2.png",
-        3: "/images/1758/3.png",
+        1: "/images/2335/1.png",
+        2: "/images/2335/2.png",
+        3: "/images/2335/3.png",
       },
     },
     {
-      id: 2392,
-      title: "The Pinnacle",
+      id: 2311,
+      title: "Royal",
       description:
-        "The Pinnacle design was named because at the time of its introduction over 6 years ago, this was Jerry's best piece. The cue is distinguished by its hourglass - shaped points and dominating use of the theme wood of Amboyna.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       section: "one",
       images: {
-        1: "/images/2392/1.png",
-        2: "/images/2392/2.png",
-        3: "/images/2392/3.png",
+        1: "/images/2311/1.png",
+        2: "/images/2311/2.png",
+        3: "/images/2311/3.png",
       },
     },
+
     {
-      id: 1983,
-      title: "20th Anniversary",
+      id: 2312,
+      title: "Black smoke",
       description:
-        "The Pinnacle design was named because at the time of its introduction over 6 years ago, this was Jerry's best piece. The cue is distinguished by its hourglass - shaped points and dominating use of the theme wood of Amboyna.",
-      section: "one",
-      images: {
-        1: "/images/2392/1.png",
-        2: "/images/2392/2.png",
-        3: "/images/2392/3.png",
-      },
-    },
-    {
-      id: 1523,
-      title: "Six pointer",
-      description:
-        "The Player Six Pointer is a unique cue that is a hybrid of the Player Six and the Player Eight. It is a great cue for players who are looking to improve their game.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       section: "two",
       images: {
-        1: "/images/1758/1.png",
-        2: "/images/1758/2.png",
-        3: "/images/1758/3.png",
+        1: "/images/2312/1.png",
+        2: "/images/2312/2.png",
+        3: "/images/2312/3.png",
       },
     },
     {
-      id: 2491,
-      title: "The Pinnacle",
+      id: 2322,
+      title: "Regal",
       description:
-        "The Pinnacle design was named because at the time of its introduction over 6 years ago, this was Jerry's best piece. The cue is distinguished by its hourglass - shaped points and dominating use of the theme wood of Amboyna.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       section: "two",
       images: {
-        1: "/images/2392/1.png",
-        2: "/images/2392/2.png",
-        3: "/images/2392/3.png",
-      },
-    },
-    {
-      id: 2236,
-      title: "20th Anniversary",
-      description:
-        "The Pinnacle design was named because at the time of its introduction over 6 years ago, this was Jerry's best piece. The cue is distinguished by its hourglass - shaped points and dominating use of the theme wood of Amboyna.",
-      section: "two",
-      images: {
-        1: "/images/2392/1.png",
-        2: "/images/2392/2.png",
-        3: "/images/2392/3.png",
+        1: "/images/2322/1.png",
+        2: "/images/2322/2.png",
+        3: "/images/2322/3.png",
       },
     },
   ]);
