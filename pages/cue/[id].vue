@@ -1,35 +1,43 @@
 <template>
-  <div class="text-ink min-h-screen bg-bg relative flex flex-col md:flex-row px-4 md:px-12">
-    <!-- Back Navigation -->
-    <div class="pt-6 md:pt-8">
-      <button @click="$router.back()" class="flex items-center text-ink-100 group">
-        <NuxtImg
-          src="/images/back-feather.png"
-          alt="Back"
-          class="w-10 md:w-14 mr-2 group-hover:opacity-100 opacity-50 transition-opacity duration-300"
-        />
-        <div
-          class="text-xs text-ink-100 font-mono group-hover:opacity-100 opacity-0 transition-opacity duration-300"
-        >
-          back
+  <div class="text-ink min-h-screen relative flex flex-col md:flex-row px-4 md:px-12">
+    <div v-if="cue" class="flex flex-col md:flex-row flex-1">
+      <!-- cue section -->
+      <div class="flex flex-col flex-1 max-w-[340px] pt-16">
+        <button @click="$router.back()" class="flex items-center text-ink-100 group flex-none mb-8">
+          <NuxtImg
+            src="/images/back-feather.png"
+            alt="Back"
+            class="w-10 md:w-14 mr-2 group-hover:opacity-100 opacity-50 transition-opacity duration-300"
+          />
+          <div
+            class="text-xs text-ink-100 font-mono group-hover:opacity-100 opacity-0 transition-opacity duration-300"
+          >
+            back
+          </div>
+        </button>
+        <!-- Title & Serial (Mobile only - at top) -->
+        <div class="flex-1 max-h-[700px] flex flex-col justify-center">
+          <h1>{{ cue.title }}</h1>
+          <p class="text-ink-100 font-body mt-4 text-sm md:text-base">
+            {{ cue.description }}
+          </p>
         </div>
-      </button>
-    </div>
-
-    <!-- Cue Details -->
-    <div v-if="cue" class="flex flex-col md:flex-row gap-6 md:gap-8 flex-1">
-      <!-- Title & Serial (Mobile only - at top) -->
-      <div class="md:hidden pt-4">
-        <div class="text-xs text-ink-200 font-mono mb-1">Serial number {{ cue.id }}</div>
-        <h1 class="text-2xl">
-          {{ cue.title }}
-        </h1>
       </div>
 
       <!-- Image Section -->
       <div
-        class="overflow-hidden rounded-md h-[60vh] md:h-screen flex justify-center items-center flex-1 md:ml-8"
+        class="overflow-hidden rounded-md h-[60vh] md:h-screen flex justify-center items-center flex-1 md:ml-8 relative"
       >
+        <!-- Loading Indicator -->
+        <div v-if="imageLoading" class="absolute inset-0 flex items-center justify-center">
+          <div class="flex flex-col items-center gap-3">
+            <div
+              class="w-8 h-8 border-2 border-ink-200 border-t-ink rounded-full animate-spin"
+            ></div>
+            <div class="text-ink-200 text-sm">Loading...</div>
+          </div>
+        </div>
+
         <NuxtImg
           :src="cue.images[currentImageIndex]"
           :alt="cue.title"
@@ -37,26 +45,12 @@
             'h-full object-contain transition-all duration-300',
             'drop-shadow-[0_0_16px_rgba(255,255,255,0.05)]',
             currentImageIndex === 1 ? 'cursor-zoom-in' : 'cursor-zoom-out',
+            { 'opacity-0': imageLoading },
           ]"
           loading="lazy"
           @click="toggleImage"
+          @load="imageLoading = false"
         />
-      </div>
-
-      <!-- Content -->
-      <div class="md:mt-[200px] flex-none md:max-w-[400px] pb-8 md:pb-0">
-        <!-- Title & Serial (Desktop only - on right) -->
-        <div class="hidden md:block">
-          <div class="text-sm text-ink-200 font-mono mb-2">Serial number {{ cue.id }}</div>
-          <h1>
-            {{ cue.title }}
-          </h1>
-        </div>
-
-        <!-- Description (both mobile and desktop) -->
-        <p class="text-ink-100 font-body text-sm md:text-base">
-          {{ cue.description }}
-        </p>
       </div>
     </div>
 
@@ -83,9 +77,11 @@
   const cue = ref(null);
   const error = ref(false);
   const currentImageIndex = ref(2); // Start with image 3
+  const imageLoading = ref(true);
 
   // Toggle between image 2 (index 1) and image 3 (index 2)
   const toggleImage = () => {
+    imageLoading.value = true; // Show loader when switching images
     currentImageIndex.value = currentImageIndex.value === 2 ? 3 : 2;
   };
 

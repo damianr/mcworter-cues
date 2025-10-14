@@ -34,15 +34,23 @@ module.exports = {
       addBase({
         body: {
           fontFamily: "'Lexend', sans-serif",
+          fontSize: "0.875rem", // 14px on mobile
+          "@media (min-width: 768px)": {
+            fontSize: "1rem", // 16px on desktop
+          },
         },
         "h1, h2, h3, h4, h5, h6": {
           fontFamily: "'Libre Baskerville', serif",
           fontWeight: "bold",
         },
         h1: {
-          fontSize: "2.25rem", // text-4xl equivalent
-          lineHeight: "2.5rem",
+          fontSize: "2rem", // 32px on mobile
+          lineHeight: "2.25rem",
           fontWeight: "bold",
+          "@media (min-width: 768px)": {
+            fontSize: "2.5rem", // 40px on desktop
+            lineHeight: "2.75rem",
+          },
         },
         h2: {
           fontSize: "1.875rem", // text-3xl equivalent

@@ -1,57 +1,48 @@
 <template>
   <header
     v-if="!isCueDetailPage"
-    class="fixed top-0 w-full max-w-[1400px] z-50 transition-all duration-100"
-    :class="{ 'border-b border-[#191919] bg-bg/80 backdrop-blur-md': isScrolled }"
+    class="fixed top-0 w-full z-50 transition-all duration-300"
+    :class="{ 'header-scrolled': isScrolled }"
   >
-    <div
-      class="px-4 md:px-12 transition-all duration-100"
-      :class="{ 'py-3': isScrolled, 'py-6 md:py-8': !isScrolled }"
-    >
+    <div class="max-w-[1400px] mx-auto px-4 md:px-12 py-4 md:py-6">
       <div class="flex items-center justify-between">
-        <!-- Logo Section -->
-        <NuxtLink to="/" class="flex items-end">
-          <NuxtImg
-            src="/images/feather.png"
-            loading="lazy"
-            class="transition-all duration-100"
-            :class="{ 'opacity-0 w-0 h-0 mr-0': isScrolled, 'opacity-100 w-4 mr-4': !isScrolled }"
-          />
-          <div>
-            <h1
-              class="font-bold text-ink transition-all duration-100"
-              :class="{ 'text-2xl': isScrolled, 'text-4xl': !isScrolled }"
-            >
-              m<span
-                :class="{ 'text-xl': isScrolled, 'text-3xl': !isScrolled }"
-                class="transition-all duration-100"
-                >c</span
-              >worter cues
-            </h1>
-            <div
-              class="text-ink-100 text-xl leading-none font-extralight transition-all duration-100 overflow-hidden"
-              :class="{ 'opacity-0 h-0': isScrolled, 'opacity-100 h-auto': !isScrolled }"
-            >
-              Timeless performance
-            </div>
-          </div>
+        <!-- Left - Brand Name -->
+        <NuxtLink to="/" class="text-ink font-heading text-sm md:text-base font-bold">
+          mcworter cues
         </NuxtLink>
 
-        <!-- Navigation -->
-        <nav class="hidden md:flex items-center gap-8">
+        <!-- Center - Logo -->
+        <NuxtLink to="/" class="absolute left-1/2 transform -translate-x-1/2">
+          <NuxtImg
+            src="/images/feather.png"
+            alt="McWorter Cues Logo"
+            class="h-8 md:h-12 w-auto"
+            loading="lazy"
+          />
+        </NuxtLink>
+
+        <!-- Right - Navigation -->
+        <nav class="flex items-center gap-4 md:gap-8 text-xs md:text-sm">
           <NuxtLink
             to="/"
             class="text-ink-100 hover:text-ink transition-colors"
             :class="{ 'text-ink': $route.path === '/' }"
           >
-            The Cues
+            The cues
+          </NuxtLink>
+          <NuxtLink
+            to="/evolution"
+            class="text-ink-100 hover:text-ink transition-colors"
+            :class="{ 'text-ink': $route.path === '/evolution' }"
+          >
+            The evolution
           </NuxtLink>
           <NuxtLink
             to="/about"
             class="text-ink-100 hover:text-ink transition-colors"
             :class="{ 'text-ink': $route.path === '/about' }"
           >
-            The Cue Maker
+            The cue maker
           </NuxtLink>
         </nav>
       </div>
@@ -80,3 +71,25 @@
     window.removeEventListener("scroll", handleScroll);
   });
 </script>
+
+<style scoped>
+  .header-scrolled {
+    background: linear-gradient(to bottom, rgba(16, 16, 16, 0.8) 0%, transparent 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+  }
+
+  /* .header-scrolled::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #222222;
+    mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  } */
+</style>

@@ -1,8 +1,21 @@
 <template>
   <div
-    class="max-w-screen-2xl min-h-screen pt-[120px] md:pt-[160px] mx-auto border-x-0 md:border-x border-[#191919] md:shadow-xl md:shadow-[#080808]/60"
+    class="max-w-screen-2xl min-h-screen pt-32 md:pt-40 mx-auto border-x-0 md:border-x border-[#191919] md:shadow-xl md:shadow-[#080808]/60"
   >
     <div class="px-4 md:px-24 py-8 md:py-16">
+      <div class="w-full max-w-[900px] mx-auto mb-8">
+        <div class="relative w-full" style="padding-bottom: 56.25%">
+          <iframe
+            class="absolute top-0 left-0 w-full h-full"
+            src="https://www.youtube.com/embed/o-QrrvfFJSM?si=KqjqlvhaPCccUsHN"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
       <!-- Biography -->
       <div class="p-6 md:p-12 border border-bg-200">
         <div class="text-ink-100 leading-relaxed space-y-6 md:space-y-8 text-sm md:text-base">

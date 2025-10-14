@@ -1,66 +1,87 @@
 <template>
-  <div class="pt-[120px] md:pt-[160px]">
+  <div>
+    <!-- Hero Section -->
+    <div class="pt-32 md:pt-40 pb-16 md:pb-24 px-4 md:px-12 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-ink mb-2 md:mb-4">Timeless Performance</h1>
+        <p class="text-ink-100 font-light max-w-3xl mx-auto leading-relaxed">
+          Jerry McWorter's cues are celebrated worldwide for their precision, balance, and enduring
+          beauty, each one a testament to creativity and craftsmanship at its finest.
+        </p>
+      </div>
+    </div>
+
     <!-- Section One Cues -->
-    <CueSection :cues="sectionOneCues" wrapper-class="pt-8 md:pt-16" />
+    <CueSection :cue-ids="[202, 2335, 2311]" wrapper-class="pt-8 md:pt-16" />
 
     <!-- About Section -->
-    <div
-      class="mx-4 md:mx-24 my-24 md:my-48 p-[2px] transition-opacity duration-300 border border-bg-200"
-    >
-      <div
-        class="flex flex-col md:flex-row gap-6 md:gap-8 items-start p-6 md:p-12 border border-bg-200"
-      >
-        <!-- Jerry's Image - Hidden on mobile -->
-        <div class="hidden md:block flex-shrink-0">
-          <NuxtImg
-            src="/images/jerry.jpg"
-            alt="Jerry McWorter"
-            class="h-full object-cover rounded-lg"
-            loading="lazy"
-          />
+    <div class="py-24 md:py-48 px-4 md:px-12 text-center">
+      <div class="mx-auto">
+        <!-- Top border decoration -->
+        <div class="mb-12 md:mb-16">
+          <DecorativeBorder />
         </div>
 
-        <!-- Content -->
-        <div class="flex-1 text-ink">
-          <h2 class="text-xl md:text-2xl mb-3 md:mb-4">About Jerry McWorter</h2>
-          <div class="text-ink-100 leading-relaxed space-y-3 md:space-y-4 text-sm md:text-base">
-            <p>
-              For over two decades, Jerry has been crafting precision instruments that represent the
-              pinnacle of billiards excellence. Each cue is meticulously designed and handcrafted to
-              deliver unparalleled performance and timeless elegance.
-            </p>
-            <p class="hidden md:block">
-              Our commitment to quality begins with the careful selection of premium materials and
-              extends through every aspect of the manufacturing process. From the initial design
-              concept to the final finishing touches, every Jerry McWorter cue embodies our
-              dedication to perfection.
-            </p>
-            <div class="pt-2">
-              <NuxtLink
-                to="/about"
-                class="group inline-flex items-center gap-3 bg-ink text-bg px-4 md:px-6 py-2 md:py-3 rounded-lg hover:bg-ink-100 transition-colors text-sm md:text-base"
-              >
-                <span class="font-semibold">Learn more about Jerry</span>
-                <Icon
-                  name="heroicons:arrow-right"
-                  class="w-4 h-4 group-hover:translate-x-1 transition-transform"
-                />
-              </NuxtLink>
-            </div>
-          </div>
+        <h1 class="text-ink mb-2 md:mb-4">About Jerry</h1>
+        <p class="text-ink-100 font-light max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8">
+          For more than 30 years, Jerry McWorter has poured his skill and passion into crafting cues
+          that blend art and precision. Every McWorter cue begins with his careful eye for materials
+          and balance, then takes shape through his hands, layer by layer, until it feels alive in
+          the player's grip. His work reflects a lifetime devoted to creating cues that play as
+          beautifully as they look.
+        </p>
+
+        <NuxtLink
+          to="/about"
+          class="inline-block text-ink-100 hover:text-ink transition-colors underline underline-offset-4"
+        >
+          Learn more about Jerry →
+        </NuxtLink>
+
+        <!-- Bottom border decoration -->
+        <div class="mt-12 md:mt-16">
+          <DecorativeBorder />
         </div>
       </div>
     </div>
 
     <!-- Section Two Cues -->
-    <CueSection :cues="sectionTwoCues" add-bottom-margin />
+    <CueSection :cue-ids="[2312, 2322, 2335]" add-bottom-margin />
+
+    <!-- Evolution Section -->
+    <div class="py-24 md:py-48 px-4 md:px-12 text-center">
+      <div class="mx-auto">
+        <!-- Top border decoration -->
+        <div class="mb-12 md:mb-16">
+          <DecorativeBorder />
+        </div>
+
+        <h1 class="text-ink mb-2 md:mb-4">The Evolution</h1>
+        <p class="text-ink-100 font-light max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8">
+          Over the past thirty years, Jerry McWorter has honed a design language defined by balance,
+          simplicity, and feel. What started as a quest for perfect play has matured into an art of
+          proportion and flow, where every line and detail exists for a reason. His evolution shows
+          a steady refinement, an artist growing more confident in letting the materials and form
+          speak for themselves.
+        </p>
+
+        <NuxtLink
+          to="/evolution"
+          class="inline-block text-ink-100 hover:text-ink transition-colors underline underline-offset-4"
+        >
+          View the evolution →
+        </NuxtLink>
+
+        <!-- Bottom border decoration -->
+        <div class="mt-12 md:mt-16">
+          <DecorativeBorder />
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Three Cues -->
+    <CueSection :cue-ids="[2311, 202, 2322]" add-bottom-margin />
   </div>
 </template>
 
-<script setup>
-  const { getCuesBySection } = useCues();
-
-  // Get cues by section
-  const sectionOneCues = getCuesBySection("one");
-  const sectionTwoCues = getCuesBySection("two");
-</script>
+<script setup></script>
