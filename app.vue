@@ -1,12 +1,7 @@
 <template>
   <div class="min-h-screen bg-bg">
-    <!-- Fixed noise overlay -->
-    <div class="fixed inset-0 pointer-events-none z-0 noise-overlay"></div>
-
     <AppHeader />
-    <main class="max-w-[1400px] mx-auto relative z-10">
-      <NuxtPage />
-    </main>
+    <NuxtPage />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full h-5 overflow-hidden">
+  <div class="relative flex flex-col items-center justify-center w-full h-5 overflow-hidden py-2">
     <!-- Left edge (fixed width) -->
     <svg
       class="absolute left-0 top-0 h-full"
@@ -45,7 +45,18 @@
         stroke-linecap="round"
       />
     </svg>
+    <!-- title -->
+    <h4 class="relative z-20 text-ink-100 text-sm md:text-base text-left text-center bg-bg px-4">
+      {{ title }}
+    </h4>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+  const props = defineProps({
+    title: {
+      type: String,
+      default: "",
+    },
+  });
+</script>

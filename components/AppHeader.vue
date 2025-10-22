@@ -75,10 +75,10 @@
 <style scoped>
   .header-scrolled {
     background: linear-gradient(to bottom, rgba(16, 16, 16, 0.8) 0%, transparent 100%);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
   }
 
   /* .header-scrolled::before {

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['flex flex-col gap-8 mt-12', wrapperClass]">
+  <div :class="['flex flex-col gap-8 mt-12 px-4 md:px-8', wrapperClass]">
     <!-- Loading State -->
     <div v-if="isFullCue === null" class="flex justify-center items-center min-h-[200px]">
       <div class="text-ink-200 text-sm">Loading...</div>
@@ -7,6 +7,7 @@
 
     <!-- Content -->
     <template v-else>
+      <DecorativeBorder class="mb-16 md:mb-32" :title="title" />
       <div
         v-for="cue in cues"
         :key="cue.id"
@@ -48,12 +49,17 @@
           <div class="text-xs text-ink-200 font-mono">#{{ cue.id }}</div>
         </div>
       </div>
+      <DecorativeBorder class="mt-0 md:mt-0" />
     </template>
   </div>
 </template>
 
 <script setup>
   const props = defineProps({
+    title: {
+      type: String,
+      default: "",
+    },
     cueIds: {
       type: Array,
       required: true,
