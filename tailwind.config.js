@@ -12,8 +12,8 @@ module.exports = {
     colors: {
       // Custom color palette
       bg: "#101010",
-      "bg-100": "#222222",
-      "bg-200": "#3D3D3D",
+      "bg-100": "#161616",
+      "bg-200": "#222222",
       ink: "#FCFCFC",
       "ink-100": "#AFAFAF",
       "ink-200": "#777777",

@@ -20,14 +20,14 @@
 
   <!-- Section One Cues -->
   <CueSection
-    :cue-ids="[202, 2335, 2311]"
-    wrapper-class="pt-8 md:pt-16 max-w-[2200px] mx-auto"
+    :design-ids="['anniversary', 'florentine', 'royal']"
+    wrapper-class="max-w-[2200px] mx-auto"
     title="Recent designs"
   />
 
   <!-- About Section -->
-  <div class="py-24 md:py-48 px-4 md:px-12 text-center max-w-[2200px] mx-auto">
-    <h1 class="text-ink mb-2 md:mb-4">About Jerry</h1>
+  <div class="py-24 md:py-32 px-4 md:px-12 text-center max-w-[1400px] mx-auto">
+    <SilverTitle title="About Jerry" class="mb-6" />
     <p class="text-ink-100 font-light max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8">
       For more than 30 years, Jerry McWorter has poured his skill and passion into crafting cues
       that blend art and precision. Every McWorter cue begins with his careful eye for materials and
@@ -46,15 +46,14 @@
 
   <!-- Section Two Cues -->
   <CueSection
-    :cue-ids="[2312, 2322, 2335]"
+    :design-ids="['silver-smoke', 'engrave', 'florentine']"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
-    title="Famous designs"
   />
 
   <!-- Evolution Section -->
-  <div class="py-24 md:py-48 px-4 md:px-12 text-center max-w-[2200px] mx-auto">
-    <h1 class="text-ink mb-2 md:mb-4">The Evolution</h1>
+  <div class="py-24 md:py-32 px-4 md:px-12 text-center max-w-[1400px] mx-auto">
+    <SilverTitle title="The Evolution" class="mb-6" />
     <p class="text-ink-100 font-light max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8">
       Over the past thirty years, Jerry McWorter has honed a design language defined by balance,
       simplicity, and feel. What started as a quest for perfect play has matured into an art of
@@ -73,14 +72,14 @@
 
   <!-- Section Three Cues -->
   <CueSection
-    :cue-ids="[2311, 202, 2322]"
+    :design-ids="['royal', 'anniversary', 'engrave']"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
   />
 
   <!-- Past Cues Section -->
-  <div class="pb-24 md:pb-48 px-4 md:px-12 max-w-[2200px] mx-auto">
-    <h1 class="text-ink text-center mb-12 md:mb-16">Past cues</h1>
+  <div class="py-24 md:py-48 px-4 md:px-12 max-w-[2200px] mx-auto">
+    <SilverTitle title="Past cues" class="mb-24" />
 
     <div class="grid grid-cols-2 md:grid-cols-6 gap-4 md:gap-8 max-w-5xl mx-auto">
       <div
