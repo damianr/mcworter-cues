@@ -108,16 +108,16 @@ export default function useCues() {
       },
     },
     {
-      id: 3334,
+      id: 2333,
       designId: "royal",
       images: {
         details: {
-          1: "images/3334/details/1.png",
-          2: "images/3334/details/2.png",
+          1: "images/2333/details/1.png",
+          2: "images/2333/details/2.png",
         },
         list: {
-          1: "images/3334/list/1.png",
-          2: "images/3334/list/2.png",
+          1: "images/2333/list/1.png",
+          2: "images/2333/list/2.png",
         },
       },
     },

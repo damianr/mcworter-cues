@@ -46,7 +46,7 @@
 
   <!-- Section Two Cues -->
   <CueSection
-    :design-ids="['deco', 'silver-smoke', 'engrave', 'points_interupted']"
+    :design-ids="['deco', 'silver-smoke', 'points_interupted']"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
   />
