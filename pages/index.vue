@@ -20,7 +20,7 @@
 
   <!-- Section One Cues -->
   <CueSection
-    :design-ids="['anniversary', 'florentine', 'royal']"
+    :design-ids="['regal', 'florentine', 'venetian', 'victorian_crown']"
     wrapper-class="max-w-[2200px] mx-auto"
     title="Recent designs"
   />
@@ -46,7 +46,7 @@
 
   <!-- Section Two Cues -->
   <CueSection
-    :design-ids="['silver-smoke', 'engrave', 'florentine']"
+    :design-ids="['deco', 'silver-smoke', 'engrave', 'points_interupted']"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
   />

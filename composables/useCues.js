@@ -14,6 +14,24 @@ export default function useCues() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
     {
+      id: "venetian",
+      title: "The Venetian",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      id: "victorian_crown",
+      title: "The Victorian Crown",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      id: "deco",
+      title: "The Deco",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
       id: "royal",
       title: "The Royal",
       description:
@@ -28,6 +46,18 @@ export default function useCues() {
     {
       id: "engrave",
       title: "The Engrave",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      id: "regal",
+      title: "The Regal",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      id: "points_interupted",
+      title: "The Points Interupted",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
@@ -116,6 +146,104 @@ export default function useCues() {
         list: {
           1: "images/2322/list/1.png",
           2: "images/2322/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2337,
+      designId: "venetian",
+      images: {
+        details: {
+          1: "images/2337/details/1.png",
+          2: "images/2337/details/2.png",
+        },
+        list: {
+          1: "images/2337/list/1.png",
+          2: "images/2337/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2323,
+      designId: "venetian",
+      images: {
+        details: {
+          1: "images/2323/details/1.png",
+          2: "images/2323/details/2.png",
+        },
+        list: {
+          1: "images/2323/list/1.png",
+          2: "images/2323/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2332,
+      designId: "deco",
+      images: {
+        details: {
+          1: "images/2332/details/1.png",
+          2: "images/2332/details/2.png",
+        },
+        list: {
+          1: "images/2332/list/1.png",
+          2: "images/2332/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2287,
+      designId: "deco",
+      images: {
+        details: {
+          1: "images/2287/details/1.png",
+          2: "images/2287/details/2.png",
+        },
+        list: {
+          1: "images/2287/list/1.png",
+          2: "images/2287/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2336,
+      designId: "regal",
+      images: {
+        details: {
+          1: "images/2336/details/1.png",
+          2: "images/2336/details/2.png",
+        },
+        list: {
+          1: "images/2336/list/1.png",
+          2: "images/2336/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2329,
+      designId: "points_interupted",
+      images: {
+        details: {
+          1: "images/2329/details/1.png",
+          2: "images/2329/details/2.png",
+        },
+        list: {
+          1: "images/2329/list/1.png",
+          2: "images/2329/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2318,
+      designId: "victorian_crown",
+      images: {
+        details: {
+          1: "images/2318/details/1.png",
+          2: "images/2318/details/2.png",
+        },
+        list: {
+          1: "images/2318/list/1.png",
+          2: "images/2318/list/2.png",
         },
       },
     },
