@@ -46,7 +46,7 @@
 
   <!-- Section Two Cues -->
   <CueSection
-    :design-ids="['deco', 'silver-smoke', 'points_interupted']"
+    :design-ids="['royal', 'silver-smoke', 'points_interupted']"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
   />
@@ -72,7 +72,7 @@
 
   <!-- Section Three Cues -->
   <CueSection
-    :design-ids="['royal', 'anniversary', 'engrave']"
+    :design-ids="['deco', 'anniversary', 'engrave']"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
   />
