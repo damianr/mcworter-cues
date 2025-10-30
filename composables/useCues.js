@@ -108,16 +108,16 @@ export default function useCues() {
       },
     },
     {
-      id: 333,
+      id: 3334,
       designId: "royal",
       images: {
         details: {
-          1: "images/3333/details/1.png",
-          2: "images/3333/details/2.png",
+          1: "images/3334/details/1.png",
+          2: "images/3334/details/2.png",
         },
         list: {
-          1: "images/3333/list/1.png",
-          2: "images/3333/list/2.png",
+          1: "images/3334/list/1.png",
+          2: "images/3334/list/2.png",
         },
       },
     },
@@ -244,6 +244,20 @@ export default function useCues() {
         list: {
           1: "images/2318/list/1.png",
           2: "images/2318/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2291,
+      designId: "silver-smoke",
+      images: {
+        details: {
+          1: "images/2291/details/1.png",
+          2: "images/2291/details/2.png",
+        },
+        list: {
+          1: "images/2291/list/1.png",
+          2: "images/2291/list/2.png",
         },
       },
     },
