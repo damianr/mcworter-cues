@@ -20,9 +20,9 @@
         <!-- Title & Description -->
         <div class="flex-1 max-h-[700px] flex flex-col justify-center">
           <h1>{{ design.title }}</h1>
-          <p class="text-ink-100 font-body mt-4 text-sm md:text-base">
+          <!-- <p class="text-ink-100 font-body mt-4 text-sm md:text-base">
             {{ design.description }}
-          </p>
+          </p> -->
 
           <!-- Cue Thumbnails (if multiple cues) -->
           <div v-if="designCues.length > 1" class="mt-8">

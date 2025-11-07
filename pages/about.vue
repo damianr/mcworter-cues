@@ -1,19 +1,37 @@
 <template>
   <div
-    class="max-w-screen-2xl min-h-screen pt-32 md:pt-40 mx-auto border-x-0 md:border-x border-[#191919] md:shadow-xl md:shadow-[#080808]/60"
+    class="max-w-screen-2xl min-h-screen pt-12 md:pt-24 mx-auto border-x-0 md:border-x border-[#191919] md:shadow-xl md:shadow-[#080808]/60"
   >
     <div class="px-4 md:px-24 py-8 md:py-16">
-      <div class="w-full max-w-[900px] mx-auto mb-8">
-        <div class="relative w-full" style="padding-bottom: 56.25%">
-          <iframe
-            class="absolute top-0 left-0 w-full h-full"
-            src="https://www.youtube.com/embed/o-QrrvfFJSM?si=KqjqlvhaPCccUsHN"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
+      <div class="w-full mb-8">
+        <div class="flex flex-col md:flex-row gap-4">
+          <div class="flex-1">
+            <div class="relative w-full" style="padding-bottom: 56.25%">
+              <h3>Hall of fame speach</h3>
+              <iframe
+                class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/o-QrrvfFJSM?si=KqjqlvhaPCccUsHN"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          <div class="flex-1 bg-[black]">
+            <div class="relative w-full" style="padding-bottom: 56.25%">
+              <iframe
+                class="absolute inset-0 w-full h-full"
+                src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100057621543069%2Fvideos%2F25001282432827825%2F&show_text=false&width=560&t=0"
+                style="border: none; overflow: hidden"
+                scrolling="no"
+                frameborder="0"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                allowfullscreen="true"
+              ></iframe>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Biography -->
