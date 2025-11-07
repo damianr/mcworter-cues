@@ -11,16 +11,6 @@
           mcworter cues
         </NuxtLink>
 
-        <!-- Center - Logo -->
-        <NuxtLink to="/" class="absolute left-1/2 transform -translate-x-1/2">
-          <NuxtImg
-            src="/images/feather.png"
-            alt="McWorter Cues Logo"
-            class="h-8 md:h-12 w-auto"
-            loading="lazy"
-          />
-        </NuxtLink>
-
         <!-- Right - Navigation -->
         <nav class="flex items-center gap-4 md:gap-8 text-xs md:text-sm">
           <NuxtLink

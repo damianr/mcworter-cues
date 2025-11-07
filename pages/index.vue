@@ -8,8 +8,14 @@
 
     <!-- Content -->
     <div
-      class="relative flex flex-col items-center justify-center bg-gradient-to-b from-[rgba(0,0,0,.9)] via-[rgba(0,0,0,.5)] to-[rgba(0,0,0,0)] p-8 pt-48 pb-24"
+      class="relative flex flex-col items-center justify-center bg-gradient-to-b from-[rgba(0,0,0,.9)] via-[rgba(0,0,0,.5)] to-[rgba(0,0,0,0)] p-8 pt-24 pb-24"
     >
+      <NuxtImg
+        src="/images/logo-burl.png"
+        alt="McWorter Cues Logo"
+        class="h-32 w-auto mb-12"
+        loading="lazy"
+      />
       <h1 class="text-ink text-center mb-2 md:mb-4">Timeless Performance</h1>
       <p class="text-ink-100 text-center font-light max-w-3xl mx-auto leading-relaxed">
         Jerry McWorter's cues are celebrated worldwide for their precision, balance, and enduring
