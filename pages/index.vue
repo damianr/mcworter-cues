@@ -1,10 +1,10 @@
 <template>
   <!-- Hero Section -->
-  <div class="relative h-[90vh] w-[100vw] overflow-hidden">
+  <div class="relative overflow-hidden">
     <!-- Video Background -->
-    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+    <!-- <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
       <source src="/images/hero-vid.mov" type="video/mp4" />
-    </video>
+    </video> -->
 
     <!-- Content -->
     <div
@@ -68,12 +68,12 @@
       for themselves.
     </p>
 
-    <NuxtLink
+    <!-- <NuxtLink
       to="/evolution"
       class="inline-block text-ink-100 hover:text-ink transition-colors underline underline-offset-4"
     >
       View the evolution →
-    </NuxtLink>
+    </NuxtLink> -->
   </div>
 
   <!-- Section Three Cues -->

@@ -20,13 +20,13 @@
           >
             The cues
           </NuxtLink>
-          <NuxtLink
+          <!-- <NuxtLink
             to="/evolution"
             class="text-ink-100 hover:text-ink transition-colors"
             :class="{ 'text-ink': $route.path === '/evolution' }"
           >
             The evolution
-          </NuxtLink>
+          </NuxtLink> -->
           <NuxtLink
             to="/about"
             class="text-ink-100 hover:text-ink transition-colors"
