@@ -204,6 +204,20 @@ export default function useCues() {
       },
     },
     {
+      id: 2290,
+      designId: "venetian",
+      images: {
+        details: {
+          1: "images/2290/details/1.png",
+          2: "images/2290/details/2.png",
+        },
+        list: {
+          1: "images/2290/list/1.png",
+          2: "images/2290/list/2.png",
+        },
+      },
+    },
+    {
       id: 2332,
       designId: "deco",
       images: {
@@ -256,6 +270,20 @@ export default function useCues() {
         list: {
           1: "images/2329/list/1.png",
           2: "images/2329/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2302,
+      designId: "points_interupted",
+      images: {
+        details: {
+          1: "images/2302/details/1.png",
+          2: "images/2302/details/2.png",
+        },
+        list: {
+          1: "images/2302/list/1.png",
+          2: "images/2302/list/2.png",
         },
       },
     },
