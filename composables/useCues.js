@@ -61,6 +61,18 @@ export default function useCues() {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
+    {
+      id: "six-points",
+      title: "The Six Point Player",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      id: "ivory-crown",
+      title: "The Ivory Crown",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
   ]);
 
   // Cues are individual versions/iterations of a design
@@ -90,6 +102,20 @@ export default function useCues() {
         list: {
           1: "images/2335/list/1.png",
           2: "images/2335/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2334,
+      designId: "florentine",
+      images: {
+        details: {
+          1: "images/2334/details/1.png",
+          2: "images/2334/details/2.png",
+        },
+        list: {
+          1: "images/2334/list/1.png",
+          2: "images/2334/list/2.png",
         },
       },
     },
@@ -248,6 +274,20 @@ export default function useCues() {
       },
     },
     {
+      id: 2341,
+      designId: "victorian_crown",
+      images: {
+        details: {
+          1: "images/2341/details/1.png",
+          2: "images/2341/details/2.png",
+        },
+        list: {
+          1: "images/2341/list/1.png",
+          2: "images/2341/list/2.png",
+        },
+      },
+    },
+    {
       id: 2291,
       designId: "silver-smoke",
       images: {
@@ -258,6 +298,34 @@ export default function useCues() {
         list: {
           1: "images/2291/list/1.png",
           2: "images/2291/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2293,
+      designId: "six-points",
+      images: {
+        details: {
+          1: "images/2293/details/1.png",
+          2: "images/2293/details/2.png",
+        },
+        list: {
+          1: "images/2293/list/1.png",
+          2: "images/2293/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2340,
+      designId: "ivory-crown",
+      images: {
+        details: {
+          1: "images/2340/details/1.png",
+          2: "images/2340/details/2.png",
+        },
+        list: {
+          1: "images/2340/list/1.png",
+          2: "images/2340/list/2.png",
         },
       },
     },

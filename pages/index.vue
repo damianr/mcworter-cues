@@ -16,7 +16,9 @@
         class="h-32 w-auto mb-12"
         loading="lazy"
       />
-      <h1 class="text-ink text-center mb-2 md:mb-4">Timeless Performance</h1>
+      <h1 class="text-ink text-center mb-2 md:mb-4">
+        A cue that actually plays as good as it looks
+      </h1>
       <p class="text-ink-100 text-center font-light max-w-3xl mx-auto leading-relaxed">
         Jerry McWorter's cues are celebrated worldwide for their precision, balance, and enduring
         beauty, each one a testament to creativity and craftsmanship at its finest.
@@ -52,7 +54,7 @@
 
   <!-- Section Two Cues -->
   <CueSection
-    :design-ids="['royal', 'silver-smoke', 'points_interupted']"
+    :design-ids="['royal', 'silver-smoke', 'points_interupted', 'six-points', 'ivory-crown']"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
   />

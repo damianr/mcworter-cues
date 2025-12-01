@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
+  devServer: { port: 3005 },
   modules: ["@nuxt/icon", "@nuxtjs/tailwindcss", "@nuxt/image"],
   pages: true,
   css: ["~/assets/css/main.css"],
