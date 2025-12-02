@@ -20,7 +20,7 @@ export default function useCues() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
     {
-      id: "victorian_crown",
+      id: "victorian-crown",
       title: "The Victorian Crown",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -56,8 +56,8 @@ export default function useCues() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
     {
-      id: "points_interupted",
-      title: "The Points Interupted",
+      id: "points-interrupted",
+      title: "The Points Interrupted",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
@@ -261,7 +261,7 @@ export default function useCues() {
     },
     {
       id: 2329,
-      designId: "points_interupted",
+      designId: "points-interrupted",
       images: {
         details: {
           1: "images/2329/details/1.png",
@@ -275,7 +275,7 @@ export default function useCues() {
     },
     {
       id: 2302,
-      designId: "points_interupted",
+      designId: "points-interrupted",
       images: {
         details: {
           1: "images/2302/details/1.png",
@@ -289,7 +289,7 @@ export default function useCues() {
     },
     {
       id: 2318,
-      designId: "victorian_crown",
+      designId: "victorian-crown",
       images: {
         details: {
           1: "images/2318/details/1.png",
@@ -303,7 +303,7 @@ export default function useCues() {
     },
     {
       id: 2341,
-      designId: "victorian_crown",
+      designId: "victorian-crown",
       images: {
         details: {
           1: "images/2341/details/1.png",
@@ -356,6 +356,110 @@ export default function useCues() {
           2: "images/2340/list/2.png",
         },
       },
+    },
+  ]);
+
+  // Past cues are older cues with single images
+  const pastCues = ref([
+    {
+      image: "images/past-cues/1163.jpg",
+      designId: "ivory-crown", // To be filled in
+    },
+    {
+      image: "images/past-cues/1167.jpg",
+      designId: "razor", // To be filled in
+    },
+    {
+      image: "images/past-cues/1169.jpg",
+      designId: "ten-point-crown", // To be filled in
+    },
+    {
+      image: "images/past-cues/1174.jpg",
+      designId: "ivory-crown", // To be filled in
+    },
+    {
+      image: "images/past-cues/1246.jpg",
+      designId: "feather-crown", // To be filled in
+    },
+    {
+      image: "images/past-cues/1250.jpg",
+      designId: "details", // To be filled in
+    },
+    {
+      image: "images/past-cues/1252.jpg",
+      designId: "ivory-crown", // To be filled in
+    },
+    {
+      image: "images/past-cues/1281.jpg",
+      designId: "squares", // To be filled in
+    },
+    {
+      image: "images/past-cues/1287.jpg",
+      designId: "ptolemy", // To be filled in
+    },
+    {
+      image: "images/past-cues/1290.jpg",
+      designId: "victorian", // To be filled in
+    },
+    {
+      image: "images/past-cues/1444.jpg",
+      designId: "victorian", // To be filled in
+    },
+    {
+      image: "images/past-cues/1449.jpg",
+      designId: "pinnacle", // To be filled in
+    },
+    {
+      image: "images/past-cues/1453.jpg",
+      designId: "carnaval", // To be filled in
+    },
+    {
+      image: "images/past-cues/1463.jpg",
+      designId: "feather-crown", // To be filled in
+    },
+    {
+      image: "images/past-cues/1481.jpg",
+      designId: "ptolemy", // To be filled in
+    },
+    {
+      image: "images/past-cues/1485.jpg",
+      designId: "ten-point-crown", // To be filled in
+    },
+    {
+      image: "images/past-cues/1516.jpg",
+      designId: "spaniard", // To be filled in
+    },
+    {
+      image: "images/past-cues/1523.jpg",
+      designId: "deco", // To be filled in
+    },
+    {
+      image: "images/past-cues/1541.jpg",
+      designId: "deco", // To be filled in
+    },
+    {
+      image: "images/past-cues/1543.jpg",
+      designId: "regal", // To be filled in
+    },
+    {
+      image: "images/past-cues/1605.jpg",
+      designId: "venetian", // To be filled in
+    },
+    {
+      image: "images/past-cues/1608.jpg",
+      designId: "points-interrupted", // To be filled in
+    },
+    {
+      image: "images/past-cues/1625.jpg",
+      designId: "west-palm", // To be filled in
+    },
+    {
+      image: "images/past-cues/1716.jpeg",
+      designId: "origami", // To be filled in
+    },
+    {
+      image: "images/past-cues/1772.jpg",
+      designId: "six-points", // To be filled in
     },
   ]);
 
@@ -446,9 +550,18 @@ export default function useCues() {
       .filter(Boolean);
   };
 
+  // Get all past cues
+  const getAllPastCues = () => pastCues.value;
+
+  // Get past cues for a specific design
+  const getPastCuesByDesignId = (designId) => {
+    return pastCues.value.filter((cue) => cue.designId === designId);
+  };
+
   return {
     designs: readonly(designs),
     cues: readonly(cues),
+    pastCues: readonly(pastCues),
     getAllDesigns,
     getDesignById,
     getAllCues,
@@ -458,5 +571,7 @@ export default function useCues() {
     getDesignsByIds,
     getLatestCuesByDesignIds,
     getDesignsWithAllCues,
+    getAllPastCues,
+    getPastCuesByDesignId,
   };
 }

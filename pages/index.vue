@@ -28,7 +28,7 @@
 
   <!-- Section One Cues -->
   <CueSection
-    :design-ids="['regal', 'florentine', 'venetian', 'victorian_crown']"
+    :design-ids="['regal', 'florentine', 'venetian', 'victorian-crown']"
     wrapper-class="max-w-[2200px] mx-auto"
     title="Recent designs"
   />
@@ -54,7 +54,7 @@
 
   <!-- Section Two Cues -->
   <CueSection
-    :design-ids="['royal', 'silver-smoke', 'points_interupted', 'six-points', 'ivory-crown']"
+    :design-ids="['royal', 'silver-smoke', 'points-interrupted', 'six-points', 'ivory-crown']"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
   />
@@ -86,19 +86,19 @@
   />
 
   <!-- Past Cues Section -->
-  <div class="py-24 md:py-48 px-4 md:px-12 max-w-[2200px] mx-auto">
+  <div v-if="pastCues.length > 0" class="py-24 md:py-48 px-4 md:px-12 max-w-[2200px] mx-auto">
     <SilverTitle title="Past cues" class="mb-24" />
 
     <div class="grid grid-cols-2 md:grid-cols-6 gap-4 md:gap-8 max-w-5xl mx-auto">
       <div
         v-for="cue in pastCues"
-        :key="cue"
+        :key="cue.image"
         class="overflow-hidden rounded cursor-pointer"
-        @click="openModal(cue)"
+        @click="openModal(cue.image)"
       >
         <NuxtImg
-          :src="`/images/past-cues/${cue}`"
-          :alt="`Past cue ${cue}`"
+          :src="`/${cue.image}`"
+          :alt="`Past cue ${cue.image}`"
           class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
@@ -121,8 +121,8 @@
         >
           ×
         </button>
-        <img
-          :src="`/images/past-cues/${selectedImage}`"
+        <NuxtImg
+          :src="`/${selectedImage}`"
           :alt="`Past cue ${selectedImage}`"
           class="max-w-full max-h-full object-contain"
           @click.stop
@@ -133,33 +133,29 @@
 </template>
 
 <script setup>
-  const pastCues = [
-    "1163.jpg",
-    "1167.jpg",
-    "1169.jpg",
-    "1174.jpg",
-    "1246.jpg",
-    "1250.jpg",
-    "1252.jpg",
-    "1281.jpg",
-    "1287.jpg",
-    "1290.jpg",
-    "1444.jpg",
-    "1449.jpg",
-    "1453.jpg",
-    "1463.jpg",
-    "1481.jpg",
-    "1485.jpg",
-    "1516.jpg",
-    "1523.jpg",
-    "1541.jpg",
-    "1543.jpg",
-    "1605.jpg",
-    "1608.jpg",
-    "1625.jpg",
-    "1716.jpeg",
-    "1772.jpg",
+  const { getAllPastCues } = useCues();
+  const allPastCues = getAllPastCues();
+
+  // Design IDs that are already displayed in CueSection components
+  const displayedDesignIds = [
+    "regal",
+    "florentine",
+    "venetian",
+    "victorian-crown",
+    "royal",
+    "silver-smoke",
+    "points-interrupted",
+    "six-points",
+    "ivory-crown",
+    "deco",
+    "anniversary",
+    "engrave",
   ];
+
+  // Filter past cues to only show those whose design isn't already displayed
+  const pastCues = computed(() => {
+    return allPastCues.filter((cue) => !displayedDesignIds.includes(cue.designId));
+  });
 
   const selectedImage = ref(null);
 

@@ -24,10 +24,14 @@
             {{ design.description }}
           </p> -->
 
-          <!-- Cue Thumbnails (if multiple cues) -->
-          <div v-if="designCues.length > 1" class="mt-8">
+          <!-- Combined Cue Thumbnails -->
+          <div
+            v-if="designCues.length > 1 || (designCues.length === 1 && pastCues.length > 0) || pastCues.length > 0"
+            class="mt-8"
+          >
             <div class="text-ink-100 text-xs font-mono mb-4">Versions:</div>
             <div class="flex flex-wrap gap-3">
+              <!-- Regular Cue Thumbnails -->
               <div
                 v-for="cue in designCues"
                 :key="cue.id"
@@ -42,6 +46,20 @@
                 <NuxtImg
                   :src="cue.images.details[1]"
                   :alt="`${design.title} #${cue.id}`"
+                  class="w-20 h-20 object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <!-- Past Cue Thumbnails -->
+              <div
+                v-for="(pastCue, index) in pastCues"
+                :key="`past-${index}`"
+                @click="openModal(`/${pastCue.image}`)"
+                class="cursor-pointer border-2 border-ink-200 opacity-50 hover:opacity-75 rounded overflow-hidden transition-all duration-200"
+              >
+                <NuxtImg
+                  :src="`/${pastCue.image}`"
+                  :alt="`${design.title} past cue`"
                   class="w-20 h-20 object-cover"
                   loading="lazy"
                 />
@@ -140,10 +158,11 @@
   const route = useRoute();
   const designId = route.params.id;
 
-  const { getDesignById, getCuesByDesignId } = useCues();
+  const { getDesignById, getCuesByDesignId, getPastCuesByDesignId } = useCues();
 
   const design = ref(null);
   const designCues = ref([]);
+  const pastCues = ref([]);
   const selectedCueId = ref(null);
   const error = ref(false);
   const modalImage = ref(null);
@@ -186,11 +205,13 @@
     if (foundDesign) {
       design.value = foundDesign;
       designCues.value = getCuesByDesignId(designId);
+      pastCues.value = getPastCuesByDesignId(designId);
 
       if (designCues.value.length > 0) {
         // Select the first (or latest) cue by default
         selectedCueId.value = designCues.value[0].id;
-      } else {
+      } else if (pastCues.value.length === 0) {
+        // Only show error if there are no cues and no past cues
         error.value = true;
       }
     } else {
