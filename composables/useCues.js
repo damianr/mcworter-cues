@@ -314,6 +314,7 @@ export default function useCues() {
     {
       id: 2318,
       designId: "victorian-crown",
+      highlight: true,
       images: {
         details: {
           1: "images/2318/details/1.png",
@@ -412,6 +413,7 @@ export default function useCues() {
     {
       id: 2047,
       designId: "deco",
+      highlight: true,
       images: {
         details: {
           1: "images/2047/details/1.png",
@@ -619,6 +621,20 @@ export default function useCues() {
     return cues.value.filter((cue) => cue.designId === designId);
   };
 
+  // Sort cues: highlighted first, then by ID descending
+  const sortCues = (cuesArray) => {
+    return [...cuesArray].sort((a, b) => {
+      // First, sort by highlight (highlighted cues come first)
+      const aHighlight = a.highlight ? 1 : 0;
+      const bHighlight = b.highlight ? 1 : 0;
+      if (aHighlight !== bHighlight) {
+        return bHighlight - aHighlight; // Highlighted first
+      }
+      // Then sort by ID descending
+      return b.id - a.id;
+    });
+  };
+
   // Get designs by array of design IDs
   const getDesignsByIds = (ids) => {
     return ids.map((id) => designs.value.find((design) => design.id === id)).filter(Boolean);
@@ -659,8 +675,8 @@ export default function useCues() {
         const designCues = getCuesByDesignId(designId);
         if (designCues.length === 0) return null;
 
-        // Sort cues by ID in descending order (largest ID first)
-        const sortedCues = [...designCues].sort((a, b) => b.id - a.id);
+        // Sort cues: highlighted first, then by ID descending
+        const sortedCues = sortCues(designCues);
 
         return {
           designId: design.id,
@@ -695,5 +711,6 @@ export default function useCues() {
     getDesignsWithAllCues,
     getAllPastCues,
     getPastCuesByDesignId,
+    sortCues,
   };
 }

@@ -26,7 +26,11 @@
 
           <!-- Combined Cue Thumbnails -->
           <div
-            v-if="designCues.length > 1 || (designCues.length === 1 && pastCues.length > 0) || pastCues.length > 0"
+            v-if="
+              designCues.length > 1 ||
+              (designCues.length === 1 && pastCues.length > 0) ||
+              pastCues.length > 0
+            "
             class="mt-8"
           >
             <div class="text-ink-100 text-xs font-mono mb-4">Versions:</div>
@@ -158,7 +162,7 @@
   const route = useRoute();
   const designId = route.params.id;
 
-  const { getDesignById, getCuesByDesignId, getPastCuesByDesignId } = useCues();
+  const { getDesignById, getCuesByDesignId, getPastCuesByDesignId, sortCues } = useCues();
 
   const design = ref(null);
   const designCues = ref([]);
@@ -204,11 +208,13 @@
     const foundDesign = getDesignById(designId);
     if (foundDesign) {
       design.value = foundDesign;
-      designCues.value = getCuesByDesignId(designId);
+      const unsortedCues = getCuesByDesignId(designId);
+      // Sort cues: highlighted first, then by ID descending
+      designCues.value = sortCues(unsortedCues);
       pastCues.value = getPastCuesByDesignId(designId);
 
       if (designCues.value.length > 0) {
-        // Select the first (or latest) cue by default
+        // Select the first (highlighted or latest) cue by default
         selectedCueId.value = designCues.value[0].id;
       } else if (pastCues.value.length === 0) {
         // Only show error if there are no cues and no past cues

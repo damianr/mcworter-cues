@@ -30,7 +30,6 @@
   <CueSection
     :design-ids="['regal', 'florentine', 'venetian', 'victorian-crown', 'map', 'aztec']"
     wrapper-class="max-w-[2200px] mx-auto"
-    title="Recent designs"
   />
 
   <!-- About Section -->
@@ -94,7 +93,7 @@
 
   <!-- Past Cues Section -->
   <div v-if="pastCues.length > 0" class="py-24 md:py-48 px-4 md:px-12 max-w-[2200px] mx-auto">
-    <SilverTitle title="Past cues" class="mb-24" />
+    <!-- <SilverTitle title="Past cues" class="mb-24" /> -->
 
     <div class="grid grid-cols-2 md:grid-cols-6 gap-4 md:gap-8 max-w-5xl mx-auto">
       <div
