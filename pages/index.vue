@@ -28,7 +28,7 @@
 
   <!-- Section One Cues -->
   <CueSection
-    :design-ids="['regal', 'florentine', 'venetian', 'victorian-crown']"
+    :design-ids="['regal', 'florentine', 'venetian', 'victorian-crown', 'map', 'aztec']"
     wrapper-class="max-w-[2200px] mx-auto"
     title="Recent designs"
   />
@@ -54,7 +54,14 @@
 
   <!-- Section Two Cues -->
   <CueSection
-    :design-ids="['royal', 'silver-smoke', 'points-interrupted', 'six-points', 'ivory-crown']"
+    :design-ids="[
+      'royal',
+      'silver-smoke',
+      'points-interrupted',
+      'six-points',
+      'ivory-crown',
+      'pinnacle',
+    ]"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
   />
@@ -80,7 +87,7 @@
 
   <!-- Section Three Cues -->
   <CueSection
-    :design-ids="['deco', 'anniversary', 'engrave']"
+    :design-ids="['deco', 'anniversary', 'engrave', 'feather']"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
   />
@@ -142,14 +149,18 @@
     "florentine",
     "venetian",
     "victorian-crown",
+    "map",
+    "aztec",
     "royal",
     "silver-smoke",
     "points-interrupted",
     "six-points",
     "ivory-crown",
+    "pinnacle",
     "deco",
     "anniversary",
     "engrave",
+    "feather",
   ];
 
   // Filter past cues to only show those whose design isn't already displayed

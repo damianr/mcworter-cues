@@ -73,6 +73,30 @@ export default function useCues() {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
+    {
+      id: "map",
+      title: "The Map",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      id: "aztec",
+      title: "The Aztec",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      id: "pinnacle",
+      title: "The Pinnacle",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      id: "feather",
+      title: "The Feather",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
   ]);
 
   // Cues are individual versions/iterations of a design
@@ -354,6 +378,104 @@ export default function useCues() {
         list: {
           1: "images/2340/list/1.png",
           2: "images/2340/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2300,
+      designId: "engrave",
+      images: {
+        details: {
+          1: "images/2300/details/1.png",
+          2: "images/2300/details/2.png",
+        },
+        list: {
+          1: "images/2300/list/1.png",
+          2: "images/2300/list/2.png",
+        },
+      },
+    },
+    {
+      id: 1710,
+      designId: "map",
+      images: {
+        details: {
+          1: "images/1710/details/1.png",
+          2: "images/1710/details/2.png",
+        },
+        list: {
+          1: "images/1710/list/1.png",
+          2: "images/1710/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2047,
+      designId: "deco",
+      images: {
+        details: {
+          1: "images/2047/details/1.png",
+          2: "images/2047/details/2.png",
+        },
+        list: {
+          1: "images/2047/list/1.png",
+          2: "images/2047/list/2.png",
+        },
+      },
+    },
+    {
+      id: 208,
+      designId: "anniversary",
+      images: {
+        details: {
+          1: "images/208/details/1.png",
+          2: "images/208/details/2.png",
+        },
+        list: {
+          1: "images/208/list/1.png",
+          2: "images/208/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2051,
+      designId: "aztec",
+      images: {
+        details: {
+          1: "images/2051/details/1.png",
+          2: "images/2051/details/2.png",
+        },
+        list: {
+          1: "images/2051/list/1.png",
+          2: "images/2051/list/2.png",
+        },
+      },
+    },
+    {
+      id: 2326,
+      designId: "pinnacle",
+      images: {
+        details: {
+          1: "images/2326/details/1.png",
+          2: "images/2326/details/2.png",
+        },
+        list: {
+          1: "images/2326/list/1.png",
+          2: "images/2326/list/2.png",
+        },
+      },
+    },
+    {
+      id: 1790,
+      designId: "feather",
+      images: {
+        details: {
+          1: "images/1790/details/1.png",
+          2: "images/1790/details/2.png",
+        },
+        list: {
+          1: "images/1790/list/1.png",
+          2: "images/1790/list/2.png",
         },
       },
     },
