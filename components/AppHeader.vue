@@ -34,6 +34,13 @@
           >
             The cue maker
           </NuxtLink>
+          <NuxtLink
+            to="/music"
+            class="text-ink-100 hover:text-ink transition-colors"
+            :class="{ 'text-ink': $route.path === '/music' }"
+          >
+            Music
+          </NuxtLink>
         </nav>
       </div>
     </div>

@@ -28,7 +28,7 @@
 
   <!-- Section One Cues -->
   <CueSection
-    :design-ids="['regal', 'florentine', 'venetian', 'victorian-crown', 'map', 'aztec']"
+    :design-ids="['regal', 'florentine', 'venetian', 'victorian-crown', 'pinnacle']"
     wrapper-class="max-w-[2200px] mx-auto"
   />
 
@@ -36,10 +36,8 @@
   <div class="py-24 md:py-32 px-4 md:px-12 text-center max-w-[1400px] mx-auto">
     <SilverTitle title="About Jerry" class="mb-6" />
     <p class="text-ink-100 font-light max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8">
-      For more than 30 years, Jerry McWorter has poured his skill and passion into crafting cues
-      that blend art and precision. Every McWorter cue begins with his careful eye for materials and
-      balance, then takes shape through his hands, layer by layer, until it feels alive in the
-      player's grip. His work reflects a lifetime devoted to creating cues that play as beautifully
+      For nearly 40 years, Jerry McWorter has poured his skill and passion into crafting cues
+      that blend art and precision. Every McWorter Cue shows Jerry's unique eye for materials and harmony of design, it then takes shape layer by layer until it comes alive in the players hand. His work reflects a lifetime devoted to creating cues that play as beautifully
       as they look.
     </p>
 
@@ -59,7 +57,6 @@
       'points-interrupted',
       'six-points',
       'ivory-crown',
-      'pinnacle',
     ]"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
@@ -86,7 +83,22 @@
 
   <!-- Section Three Cues -->
   <CueSection
-    :design-ids="['deco', 'anniversary', 'engrave', 'feather']"
+    :design-ids="['deco', 'anniversary', 'engrave', 'aztec']"
+    add-bottom-margin
+    wrapper-class="max-w-[2200px] mx-auto"
+  />
+
+  <!-- ICCS Section -->
+  <div class="py-24 md:py-32 px-4 md:px-12 text-center max-w-[1400px] mx-auto">
+    <SilverTitle title="ICCS" class="mb-6" />
+    <p class="text-ink-100 font-light max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8">
+      The International Cue Collectors Society showcases exceptional cues from master craftsmen around the world. These special designs represent unique collaborations and limited editions created for the society's discerning members.
+    </p>
+  </div>
+
+  <!-- ICCS Cues -->
+  <CueSection
+    :design-ids="['map', 'feather']"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
   />
@@ -148,17 +160,17 @@
     "florentine",
     "venetian",
     "victorian-crown",
-    "map",
-    "aztec",
+    "pinnacle",
     "royal",
     "silver-smoke",
     "points-interrupted",
     "six-points",
     "ivory-crown",
-    "pinnacle",
     "deco",
     "anniversary",
     "engrave",
+    "aztec",
+    "map",
     "feather",
   ];
 
