@@ -35,13 +35,13 @@
           <div class="space-y-8 md:space-y-12">
             <!-- Landscape Videos Row -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              <!-- Hall of Fame Speech -->
+              <!-- Duel Passions -->
               <div>
                 <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
                   <iframe
                     class="absolute inset-0 w-full h-full"
-                    src="https://www.youtube.com/embed/o-QrrvfFJSM?si=KqjqlvhaPCccUsHN"
-                    title="Hall of Fame Speech"
+                    src="https://www.youtube.com/embed/GFuvwLxoWY0?si=NZDUIo83o8no7v3z"
+                    title="Duel Passions"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerpolicy="strict-origin-when-cross-origin"
@@ -61,6 +61,36 @@
                     frameborder="0"
                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                     allowfullscreen="true"
+                  ></iframe>
+                </div>
+              </div>
+
+              <!-- Video 3 -->
+              <div>
+                <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
+                  <iframe
+                    class="absolute inset-0 w-full h-full"
+                    src="https://www.youtube.com/embed/Wx57l1YG7vQ?si=4Gy1KYZ6lK2WHY9x"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+
+              <!-- Video 4 -->
+              <div>
+                <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
+                  <iframe
+                    class="absolute inset-0 w-full h-full"
+                    src="https://www.youtube.com/embed/OXM8MfOy9gE?si=0nsFWtNiNX1nkBtM"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
                   ></iframe>
                 </div>
               </div>
@@ -203,7 +233,7 @@
               <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
                 <iframe
                   class="absolute inset-0 w-full h-full"
-                  src="https://www.youtube.com/embed/o-QrrvfFJSM?si=KqjqlvhaPCccUsHN"
+                  src="https://www.youtube.com/embed/4ECBG0db_H8?si=MntyfA4dnEfYZo9C"
                   title="The Gallery of American Cue Art"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
