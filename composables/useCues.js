@@ -186,20 +186,6 @@ export default function useCues() {
       },
     },
     {
-      id: 2322,
-      designId: "engrave",
-      images: {
-        details: {
-          1: "images/2322/details/1.png",
-          2: "images/2322/details/2.png",
-        },
-        list: {
-          1: "images/2322/list/1.png",
-          2: "images/2322/list/2.png",
-        },
-      },
-    },
-    {
       id: 2337,
       designId: "venetian",
       images: {
