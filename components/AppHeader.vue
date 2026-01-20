@@ -18,7 +18,7 @@
             class="text-ink-100 hover:text-ink transition-colors"
             :class="{ 'text-ink': $route.path === '/' }"
           >
-            The cues
+            The Cues
           </NuxtLink>
           <!-- <NuxtLink
             to="/evolution"
@@ -32,7 +32,7 @@
             class="text-ink-100 hover:text-ink transition-colors"
             :class="{ 'text-ink': $route.path === '/about' }"
           >
-            The cue maker
+            The Maker
           </NuxtLink>
           <NuxtLink
             to="/music"

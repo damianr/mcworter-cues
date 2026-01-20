@@ -94,6 +94,21 @@
                   ></iframe>
                 </div>
               </div>
+
+              <!-- Video 5 -->
+              <div>
+                <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
+                  <iframe
+                    class="absolute inset-0 w-full h-full"
+                    src="https://www.youtube.com/embed/OCXfjm_zr_g?si=6OxtWlqzxiH8_lMS"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
             </div>
 
             <!-- Portrait Videos Row -->
@@ -150,6 +165,7 @@
             <div class="space-y-3 md:space-y-4 flex-1">
               <h2 class="text-xl md:text-2xl font-semibold text-ink">Notable Achievements</h2>
               <ul class="space-y-2">
+                <li>• Hall of Fame</li>
                 <li>• American Cuemakers Association Board of Directors: 1996-1998</li>
                 <li>• American Cuemakers Association President: 1998-2000</li>
                 <li>• Creator and co-producer of the prestigious Gallery of American Cue Art</li>
@@ -158,6 +174,7 @@
                   • Billiards technical director and advisor for commercials, TV shows and feature
                   films
                 </li>
+                <li>• 2025 recipient of the Trail Blazers Award from The International Cue Collectors show</li>
               </ul>
             </div>
           </div>

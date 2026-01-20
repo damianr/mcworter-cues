@@ -74,7 +74,7 @@
           <h4 class="text-sm md:text-base font-bold text-ink mb-2 leading-none">
             {{ design.title }}
           </h4>
-          <div class="text-xs text-ink-200 font-mono mb-2">#{{ getCurrentCue(design).id }}</div>
+          <div class="text-xs text-ink-200 font-mono mb-2 hidden md:block">#{{ getCurrentCue(design).id }}</div>
           <!-- Variant Dots -->
           <div
             v-if="design.cues.length > 1"

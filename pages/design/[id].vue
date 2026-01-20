@@ -33,7 +33,6 @@
             "
             class="mt-8"
           >
-            <div class="text-ink-100 text-xs font-mono mb-4">Versions:</div>
             <div class="flex flex-wrap gap-3">
               <!-- Regular Cue Thumbnails -->
               <div
