@@ -41,6 +41,12 @@
           >
             Music
           </NuxtLink>
+          <a
+            href="mailto:mcwortercues@gmail.com"
+            class="text-ink-100 hover:text-ink transition-colors"
+          >
+            Contact
+          </a>
         </nav>
       </div>
     </div>
