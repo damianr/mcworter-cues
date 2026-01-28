@@ -73,7 +73,7 @@
       </div>
 
       <!-- Image Section -->
-      <div class="flex-1 overflow-y-scroll h-screen flex flex-col relative p-2">
+      <div class="flex-1 overflow-y-auto flex flex-col relative p-2" style="height: 100vh; max-height: 100vh;">
         <!-- Loading Indicator -->
         <div
           v-if="allImagesLoading"
@@ -88,25 +88,26 @@
         </div>
 
         <div
-          class="flex items-center justify-center max-h-[90vh] w-full overflow-clip cursor-pointer image-gradient-bg"
+          class="flex items-center justify-center w-full overflow-clip cursor-pointer image-gradient-bg"
+          style="height: 90vh; max-height: 90vh; min-height: 90vh;"
           @click="openModal(selectedCue.images.details[1])"
         >
           <NuxtImg
             :src="selectedCue.images.details[1]"
             :alt="design.title"
-            class="h-full object-contain"
+            class="h-full w-auto object-contain"
             loading="eager"
             @load="onImageLoad(1)"
           />
         </div>
         <div
-          class="flex items-center justify-center w-full my-2 overflow-clip cursor-pointer image-gradient-bg"
+          class="flex items-center justify-center w-full my-2 overflow-clip cursor-pointer image-gradient-bg flex-shrink-0 flex-grow-0"
           @click="openModal(selectedCue.images.details[2])"
         >
           <NuxtImg
             :src="selectedCue.images.details[2]"
             :alt="design.title"
-            class="h-full object-contain"
+            class="h-auto w-full max-h-[90vh] object-contain"
             loading="eager"
             @load="onImageLoad(2)"
           />

@@ -20,8 +20,7 @@
         A cue that actually plays as good as it looks
       </h1>
       <p class="text-ink-100 text-center font-light max-w-3xl mx-auto leading-relaxed">
-        Jerry McWorter's cues are celebrated worldwide for their precision, balance, and enduring
-        beauty, each one a testament to creativity and craftsmanship at its finest.
+        McWorter cues are celebrated worldwide for their precision, balance, and timeless elegance, each one a testament to creativity and craftsmanship at its finest.
       </p>
     </div>
   </div>
@@ -92,7 +91,7 @@
   <div class="py-24 md:py-32 px-4 md:px-12 text-center max-w-[1400px] mx-auto">
     <SilverTitle title="ICCS" class="mb-6" />
     <p class="text-ink-100 font-light max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8">
-      The International Cue Collectors Society showcases exceptional cues from master craftsmen around the world. These special designs represent unique collaborations and limited editions created for the society's discerning members.
+      The International Cue Collectors Show is an organization that produces a semi annual event featuring exceptional cues from master craftsmen around the world. These Cues were created for past ICCS shows.
     </p>
   </div>
 
