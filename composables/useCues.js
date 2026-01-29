@@ -57,13 +57,13 @@ export default function useCues() {
     },
     {
       id: "points-interrupted",
-      title: "Points Interrupted",
+      title: "Point Interrupted",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
     {
       id: "six-points",
-      title: "Six Point Player",
+      title: "Six Point",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
