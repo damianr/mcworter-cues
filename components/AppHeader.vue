@@ -12,41 +12,65 @@
         </NuxtLink>
 
         <!-- Right - Navigation -->
-        <nav class="flex items-center gap-4 md:gap-8 text-xs md:text-sm">
-          <NuxtLink
-            to="/"
-            class="text-ink-100 hover:text-ink transition-colors"
-            :class="{ 'text-ink': $route.path === '/' }"
-          >
-            The Cues
-          </NuxtLink>
-          <!-- <NuxtLink
-            to="/evolution"
-            class="text-ink-100 hover:text-ink transition-colors"
-            :class="{ 'text-ink': $route.path === '/evolution' }"
-          >
-            The evolution
-          </NuxtLink> -->
-          <NuxtLink
-            to="/about"
-            class="text-ink-100 hover:text-ink transition-colors"
-            :class="{ 'text-ink': $route.path === '/about' }"
-          >
-            The Maker
-          </NuxtLink>
-          <NuxtLink
-            to="/music"
-            class="text-ink-100 hover:text-ink transition-colors"
-            :class="{ 'text-ink': $route.path === '/music' }"
-          >
-            Music
-          </NuxtLink>
-          <a
-            href="mailto:mcwortercues@gmail.com"
-            class="text-ink-100 hover:text-ink transition-colors"
-          >
-            Contact
-          </a>
+        <nav class="flex items-center text-xs md:text-sm">
+          <div class="flex items-center gap-4 md:gap-8">
+            <NuxtLink
+              to="/"
+              class="text-ink-100 hover:text-ink transition-colors"
+              :class="{ 'text-ink': $route.path === '/' }"
+            >
+              The Cues
+            </NuxtLink>
+            <!-- <NuxtLink
+              to="/evolution"
+              class="text-ink-100 hover:text-ink transition-colors"
+              :class="{ 'text-ink': $route.path === '/evolution' }"
+            >
+              The evolution
+            </NuxtLink> -->
+            <NuxtLink
+              to="/about"
+              class="text-ink-100 hover:text-ink transition-colors"
+              :class="{ 'text-ink': $route.path === '/about' }"
+            >
+              The Maker
+            </NuxtLink>
+            <NuxtLink
+              to="/music"
+              class="text-ink-100 hover:text-ink transition-colors"
+              :class="{ 'text-ink': $route.path === '/music' }"
+            >
+              Music
+            </NuxtLink>
+            <a
+              href="mailto:mcwortercues@gmail.com"
+              class="text-ink-100 hover:text-ink transition-colors"
+            >
+              Contact
+            </a>
+          </div>
+          <div class="flex items-center gap-2 ml-3">
+            <a
+              href="https://www.youtube.com/channel/UCUjNBcrm0vcAoKOmR2vCINA"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-ink-100 hover:text-ink transition-colors flex items-center"
+              aria-label="YouTube"
+              title="YouTube"
+            >
+              <Icon name="mdi:youtube" class="w-5 h-5 relative top-0.25" />
+            </a>
+            <a
+              href="https://www.facebook.com/profile.php?id=100057621543069"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-ink-100 hover:text-ink transition-colors flex items-center"
+              aria-label="Facebook"
+              title="Facebook"
+            >
+              <Icon name="mdi:facebook" class="w-5 h-5 relative top-0.25" />
+            </a>
+          </div>
         </nav>
       </div>
     </div>
