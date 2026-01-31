@@ -44,7 +44,7 @@
                 <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
                   <iframe
                     class="absolute inset-0 w-full h-full"
-                    src="https://www.youtube.com/embed/AV_aZtP_xOs?si=LZV8kBCwvFDr_tzj"
+                    src="https://www.youtube.com/embed/7loVTbuYaT8"
                     title="Hall of Fame Induction"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -85,18 +85,35 @@
               won the Pacific Coast Association for Magicians for best close-up magic in the over 21
               category.
             </p>
-            <!-- Magic Castle Video -->
-            <div class="mt-6 max-w-2xl mx-auto">
-              <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
-                <iframe
-                  class="absolute inset-0 w-full h-full"
-                  src="https://www.youtube.com/embed/GFuvwLxoWY0?si=NZDUIo83o8no7v3z"
-                  title="Magic Castle"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
+            <!-- Magic Castle Videos -->
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
+              <!-- From Magic Castle to Master Cues -->
+              <div>
+                <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
+                  <iframe
+                    class="absolute inset-0 w-full h-full"
+                    src="https://www.youtube.com/embed/tPYe58LByU4"
+                    title="From Magic Castle to Master Cues"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+              <!-- Sneaking Into Pool Halls & Learning the Hard Way -->
+              <div>
+                <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
+                  <iframe
+                    class="absolute inset-0 w-full h-full"
+                    src="https://www.youtube.com/embed/ttTy9DbI71E"
+                    title="Sneaking Into Pool Halls & Learning the Hard Way"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                  ></iframe>
+                </div>
               </div>
             </div>
           </div>
@@ -112,8 +129,8 @@
               <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
                 <iframe
                   class="absolute inset-0 w-full h-full"
-                  src="https://www.youtube.com/embed/4ECBG0db_H8?si=MntyfA4dnEfYZo9C"
-                  title="The Gallery of American Cue Art"
+                  src="https://www.youtube.com/embed/rSxnM6866Og"
+                  title="History of The Gallery of American Cue Art"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerpolicy="strict-origin-when-cross-origin"
@@ -162,12 +179,12 @@
         <div class="space-y-8 md:space-y-12">
           <!-- Landscape Videos Row -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            <!-- Video 3 -->
+            <!-- First Interview Video -->
             <div>
               <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
                 <iframe
                   class="absolute inset-0 w-full h-full"
-                  src="https://www.youtube.com/embed/Wx57l1YG7vQ?si=4Gy1KYZ6lK2WHY9x"
+                  src="https://www.youtube.com/embed/eY-3BSadkIs"
                   title="YouTube video player"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -177,12 +194,12 @@
               </div>
             </div>
 
-            <!-- Video 4 -->
+            <!-- Second Interview Video -->
             <div>
               <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
                 <iframe
                   class="absolute inset-0 w-full h-full"
-                  src="https://www.youtube.com/embed/OXM8MfOy9gE?si=0nsFWtNiNX1nkBtM"
+                  src="https://www.youtube.com/embed/wGy8_-vNSrM"
                   title="YouTube video player"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
