@@ -106,19 +106,24 @@
   <div v-if="pastCues.length > 0" class="py-24 md:py-48 px-4 md:px-12 max-w-[2200px] mx-auto">
     <SilverTitle title="Pearls from the past" class="mb-24" />
 
-    <div class="grid grid-cols-2 md:grid-cols-6 gap-4 md:gap-8 max-w-5xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8 max-w-5xl mx-auto">
       <div
         v-for="cue in pastCues"
         :key="cue.image"
-        class="overflow-hidden rounded cursor-pointer"
-        @click="openModal(cue.image)"
+        class="cursor-pointer"
+        @click="cue.designId ? navigateToDesign(cue.designId) : openModal(cue.image)"
       >
-        <NuxtImg
-          :src="`/${cue.image}`"
-          :alt="`Past cue ${cue.image}`"
-          class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300"
-          loading="lazy"
-        />
+        <div class="overflow-hidden rounded mb-2">
+          <NuxtImg
+            :src="`/${cue.image}`"
+            :alt="`Past cue ${cue.image}`"
+            class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+          />
+        </div>
+        <div class="text-ink-100 text-xs font-light text-center">
+          {{ getDesignById(cue.designId)?.title || '' }}
+        </div>
       </div>
     </div>
   </div>
@@ -150,7 +155,7 @@
 </template>
 
 <script setup>
-  const { getAllPastCues } = useCues();
+  const { getAllPastCues, getDesignById } = useCues();
   const allPastCues = getAllPastCues();
 
   // Design IDs that are already displayed in CueSection components
@@ -186,5 +191,9 @@
 
   const closeModal = () => {
     selectedImage.value = null;
+  };
+
+  const navigateToDesign = (designId) => {
+    navigateTo(`/design/${designId}`);
   };
 </script>

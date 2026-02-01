@@ -20,9 +20,6 @@
         <!-- Title & Description -->
         <div class="flex-1 max-h-[700px] flex flex-col justify-center">
           <h1>{{ design.title }}</h1>
-          <!-- <p class="text-ink-100 font-body mt-4 text-sm md:text-base">
-            {{ design.description }}
-          </p> -->
 
           <!-- Combined Cue Thumbnails -->
           <div
@@ -205,12 +202,7 @@
   const route = useRoute();
   const router = useRouter();
   const designId = route.params.id;
-  
-  // Parse cueId from URL path (e.g., /design/ivory-crown/1234)
-  const pathParts = route.path.split('/').filter(Boolean);
-  const cueIdFromUrl = pathParts.length === 3 
-    ? pathParts[2] // Keep as string to handle both numeric IDs and past cue IDs
-    : null;
+  const cueIdFromUrl = route.params.cueId || null; // Keep as string to handle both numeric IDs and past cue IDs
 
   const { getDesignById, getCuesByDesignId, getPastCuesByDesignId, sortCues } = useCues();
 
@@ -291,14 +283,12 @@
       if (designCues.value.length > 0) {
         // Check if cueId is in URL, otherwise use first cue
         if (cueIdFromUrl) {
-          // Try to find as regular cue (numeric ID)
-          const numericId = parseInt(cueIdFromUrl);
-          const cueExists = !isNaN(numericId) && designCues.value.find((cue) => cue.id === numericId);
+          const cueExists = designCues.value.find((cue) => cue.id === cueIdFromUrl);
           if (cueExists) {
-            selectedCueId.value = numericId;
+            selectedCueId.value = cueIdFromUrl;
             viewMode.value = 'regular';
           } else {
-            // Check if it's a past cue ID (string match)
+            // Check if it's a past cue ID
             const pastCueIndex = pastCues.value.findIndex(
               (pastCue) => pastCue.id === cueIdFromUrl
             );
