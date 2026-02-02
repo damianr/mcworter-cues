@@ -44,7 +44,7 @@
                 ]"
               >
                 <NuxtImg
-                  :src="cue.images.details[1]"
+                  :src="getThumbnailImage(cue, 0)"
                   :alt="`${design.title} #${cue.id}`"
                   class="w-20 h-20 object-cover"
                   loading="lazy"
@@ -63,7 +63,7 @@
                 ]"
               >
                 <NuxtImg
-                  :src="`/${pastCue.image}`"
+                  :src="getPastCueThumbnail(pastCue)"
                   :alt="`${design.title} past cue`"
                   class="w-20 h-20 object-cover"
                   loading="lazy"
@@ -94,10 +94,10 @@
           <div
             class="flex items-center justify-center w-full overflow-clip cursor-pointer image-gradient-bg"
             style="height: 90vh; max-height: 90vh; min-height: 90vh;"
-            @click="openModal(selectedCue.images.details[1])"
+            @click="openModal(getModalImage(getRawDetailImage(selectedCue, 0)))"
           >
             <NuxtImg
-              :src="selectedCue.images.details[1]"
+              :src="getDetailImage(selectedCue, 0)"
               :alt="design.title"
               class="h-full w-auto object-contain"
               loading="eager"
@@ -106,10 +106,10 @@
           </div>
           <div
             class="flex items-center justify-center w-full my-2 overflow-clip cursor-pointer image-gradient-bg flex-shrink-0 flex-grow-0"
-            @click="openModal(selectedCue.images.details[2])"
+            @click="openModal(getModalImage(getRawDetailImage(selectedCue, 1)))"
           >
             <NuxtImg
-              :src="selectedCue.images.details[2]"
+              :src="getDetailImage(selectedCue, 1)"
               :alt="design.title"
               class="h-auto w-full max-h-[90vh] object-contain"
               loading="eager"
@@ -123,10 +123,10 @@
           <div
             class="flex items-center justify-center w-full overflow-clip cursor-pointer image-gradient-bg"
             style="height: 90vh; max-height: 90vh; min-height: 90vh;"
-            @click="openModal(`/${pastCues[selectedPastCueIndex].image}`)"
+            @click="openModal(getModalImage(getRawPastCueImage(pastCues[selectedPastCueIndex])))"
           >
             <NuxtImg
-              :src="`/${pastCues[selectedPastCueIndex].image}`"
+              :src="getPastCueImage(pastCues[selectedPastCueIndex])"
               :alt="design.title"
               class="h-full w-auto object-contain"
               loading="eager"
@@ -141,10 +141,10 @@
             :key="`past-main-${index}`"
             class="flex items-center justify-center w-full overflow-clip cursor-pointer image-gradient-bg"
             :style="index === 0 ? 'height: 90vh; max-height: 90vh; min-height: 90vh;' : 'margin-top: 0.5rem;'"
-            @click="openModal(`/${pastCue.image}`)"
+            @click="openModal(getModalImage(getRawPastCueImage(pastCue)))"
           >
             <NuxtImg
-              :src="`/${pastCue.image}`"
+              :src="getPastCueImage(pastCue)"
               :alt="design.title"
               :class="index === 0 ? 'h-full w-auto object-contain' : 'h-auto w-full max-h-[90vh] object-contain'"
               loading="eager"
@@ -204,7 +204,7 @@
   const designId = route.params.id;
   const cueIdFromUrl = route.params.cueId || null; // Keep as string to handle both numeric IDs and past cue IDs
 
-  const { getDesignById, getCuesByDesignId, getPastCuesByDesignId, sortCues } = useCues();
+  const { getDesignById, getCuesByDesignId, getPastCuesByDesignId, sortCues, getOptimizedImageUrl } = useCues();
 
   const design = ref(null);
   const designCues = ref([]);
@@ -224,6 +224,64 @@
   const allImagesLoading = computed(() => {
     return designCues.value.length > 0 && loadedImages.value.size < totalImages.value;
   });
+
+  // Helper to get raw detail image URL (handles both array and object formats)
+  const getRawDetailImage = (cue, index) => {
+    if (!cue?.images?.details) return '';
+    const details = cue.images.details;
+    // Array format (Supabase)
+    if (Array.isArray(details)) {
+      return details[index] || '';
+    }
+    // Object format (old static data with 1-indexed keys)
+    return details[index + 1] || '';
+  };
+
+  // Get optimized detail image for display (1200px for retina)
+  const getDetailImage = (cue, index) => {
+    const url = getRawDetailImage(cue, index);
+    return getOptimizedImageUrl(url, { width: 1200, quality: 85 });
+  };
+
+  // Get optimized thumbnail for small previews (200px for 80x80 display)
+  const getThumbnailImage = (cue, index) => {
+    const url = getRawDetailImage(cue, index);
+    return getOptimizedImageUrl(url, { width: 200, quality: 80 });
+  };
+
+  // Helper to get raw past cue image URL
+  const getRawPastCueImage = (pastCue) => {
+    if (!pastCue) return '';
+    // Supabase format: images.main contains full URL
+    if (pastCue.images?.main) {
+      return pastCue.images.main;
+    }
+    // Backwards compatible format: image property with relative path
+    if (pastCue.image) {
+      if (pastCue.image.startsWith('http')) {
+        return pastCue.image;
+      }
+      return pastCue.image.startsWith('/') ? pastCue.image : `/${pastCue.image}`;
+    }
+    return '';
+  };
+
+  // Get optimized past cue image for display (800px for detail view)
+  const getPastCueImage = (pastCue) => {
+    const url = getRawPastCueImage(pastCue);
+    return getOptimizedImageUrl(url, { width: 800, quality: 85 });
+  };
+
+  // Get optimized past cue thumbnail (200px for sidebar)
+  const getPastCueThumbnail = (pastCue) => {
+    const url = getRawPastCueImage(pastCue);
+    return getOptimizedImageUrl(url, { width: 200, quality: 80 });
+  };
+
+  // Get full-size image for modal (larger for high-res viewing)
+  const getModalImage = (url) => {
+    return getOptimizedImageUrl(url, { width: 2000, quality: 90 });
+  };
 
   // Modal functions
   const openModal = (imageSrc) => {

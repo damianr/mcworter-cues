@@ -155,7 +155,7 @@
 </template>
 
 <script setup>
-  const { getAllPastCues, getDesignById, loading } = useCues();
+  const { getAllPastCues, getDesignById, getOptimizedImageUrl, loading } = useCues();
 
   // Design IDs that are already displayed in CueSection components
   const displayedDesignIds = [
@@ -183,21 +183,24 @@
     return allPastCues.filter((cue) => !displayedDesignIds.includes(cue.designId));
   });
 
-  // Helper to get past cue image URL
+  // Helper to get past cue image URL (optimized for thumbnails)
   const getPastCueImage = (pastCue) => {
     if (!pastCue) return '';
+    let url = '';
     // Supabase format: images.main contains full URL
     if (pastCue.images?.main) {
-      return pastCue.images.main;
+      url = pastCue.images.main;
     }
     // Backwards compatible format: image property
-    if (pastCue.image) {
+    else if (pastCue.image) {
       if (pastCue.image.startsWith('http')) {
-        return pastCue.image;
+        url = pastCue.image;
+      } else {
+        url = pastCue.image.startsWith('/') ? pastCue.image : `/${pastCue.image}`;
       }
-      return pastCue.image.startsWith('/') ? pastCue.image : `/${pastCue.image}`;
     }
-    return '';
+    // Optimize: resize to 400px wide (thumbnails display at ~200px, 2x for retina)
+    return getOptimizedImageUrl(url, { width: 400, quality: 80 });
   };
 
   const selectedImage = ref(null);

@@ -121,7 +121,7 @@
     },
   });
 
-  const { getDesignsWithAllCues } = useCues();
+  const { getDesignsWithAllCues, getOptimizedImageUrl } = useCues();
 
   // Get all designs with all their cues
   const designs = computed(() => getDesignsWithAllCues(props.designIds));
@@ -150,11 +150,15 @@
     const currentCue = design.cues[currentIndex];
     // Use array indices (0 for first image, 1 for second) - Supabase format
     const images = currentCue.images?.list;
+    let url;
     if (Array.isArray(images)) {
-      return isFullCue.value ? images[0] : images[1];
+      url = isFullCue.value ? images[0] : images[1];
+    } else {
+      // Fallback for old format (object with 1, 2 keys)
+      url = isFullCue.value ? images?.[1] : images?.[2];
     }
-    // Fallback for old format (object with 1, 2 keys)
-    return isFullCue.value ? images?.[1] : images?.[2];
+    // Optimize: resize to 1400px wide (covers up to ~1200px display + retina)
+    return getOptimizedImageUrl(url, { width: 1400, quality: 80 });
   };
 
   // Get the current cue for a design

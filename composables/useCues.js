@@ -208,6 +208,29 @@ export default function useCues() {
     return imageArray[index] || null;
   };
 
+  // Transform Supabase storage URL to use image transformation endpoint
+  // This resizes images on-the-fly for faster loading
+  const getOptimizedImageUrl = (url, options = {}) => {
+    if (!url) return '';
+    
+    // Only transform Supabase storage URLs
+    if (!url.includes('supabase.co/storage/v1/object/public/')) {
+      return url;
+    }
+    
+    const { width = 1200, quality = 80 } = options;
+    
+    // Convert from /object/public/ to /render/image/public/
+    const transformedUrl = url.replace(
+      '/storage/v1/object/public/',
+      '/storage/v1/render/image/public/'
+    );
+    
+    // Add transformation parameters
+    // resize=contain ensures proportional scaling without cropping
+    return `${transformedUrl}?width=${width}&quality=${quality}&resize=contain`;
+  };
+
   // Refresh data from Supabase
   const refresh = () => {
     initialized.value = false;
@@ -231,6 +254,7 @@ export default function useCues() {
     getAllPastCues,
     getPastCuesByDesignId,
     getImageUrl,
+    getOptimizedImageUrl,
     sortCues,
     refresh,
   };
