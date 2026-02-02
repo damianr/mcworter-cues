@@ -11,4 +11,10 @@ export default defineNuxtConfig({
     quality: 80,
     format: ["webp", "png"],
   },
+  runtimeConfig: {
+    public: {
+      supabaseUrl: process.env.SUPABASE_URL || "https://gphhckptzkwryjjjcltk.supabase.co",
+      supabaseKey: process.env.SUPABASE_KEY || "sb_publishable_bOkKNOwOtsaywEr2Pk--RA_O_zUJCxt",
+    },
+  },
 });

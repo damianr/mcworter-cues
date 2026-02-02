@@ -148,7 +148,13 @@
     initializeCueIndex(design.designId);
     const currentIndex = currentCueIndices.value[design.designId] || 0;
     const currentCue = design.cues[currentIndex];
-    return isFullCue.value ? currentCue.images.list[1] : currentCue.images.list[2];
+    // Use array indices (0 for first image, 1 for second) - Supabase format
+    const images = currentCue.images?.list;
+    if (Array.isArray(images)) {
+      return isFullCue.value ? images[0] : images[1];
+    }
+    // Fallback for old format (object with 1, 2 keys)
+    return isFullCue.value ? images?.[1] : images?.[2];
   };
 
   // Get the current cue for a design

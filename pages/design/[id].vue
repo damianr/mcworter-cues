@@ -47,7 +47,7 @@
                 ]"
               >
                 <NuxtImg
-                  :src="cue.images.details[1]"
+                  :src="getDetailImage(cue, 0)"
                   :alt="`${design.title} #${cue.id}`"
                   class="w-20 h-20 object-cover"
                   loading="lazy"
@@ -66,7 +66,7 @@
                 ]"
               >
                 <NuxtImg
-                  :src="`/${pastCue.image}`"
+                  :src="getPastCueImage(pastCue)"
                   :alt="`${design.title} past cue`"
                   class="w-20 h-20 object-cover"
                   loading="lazy"
@@ -97,10 +97,10 @@
           <div
             class="flex items-center justify-center w-full overflow-clip cursor-pointer image-gradient-bg"
             style="height: 90vh; max-height: 90vh; min-height: 90vh;"
-            @click="openModal(selectedCue.images.details[1])"
+            @click="openModal(getDetailImage(selectedCue, 0))"
           >
             <NuxtImg
-              :src="selectedCue.images.details[1]"
+              :src="getDetailImage(selectedCue, 0)"
               :alt="design.title"
               class="h-full w-auto object-contain"
               loading="eager"
@@ -109,10 +109,10 @@
           </div>
           <div
             class="flex items-center justify-center w-full my-2 overflow-clip cursor-pointer image-gradient-bg flex-shrink-0 flex-grow-0"
-            @click="openModal(selectedCue.images.details[2])"
+            @click="openModal(getDetailImage(selectedCue, 1))"
           >
             <NuxtImg
-              :src="selectedCue.images.details[2]"
+              :src="getDetailImage(selectedCue, 1)"
               :alt="design.title"
               class="h-auto w-full max-h-[90vh] object-contain"
               loading="eager"
@@ -126,10 +126,10 @@
           <div
             class="flex items-center justify-center w-full overflow-clip cursor-pointer image-gradient-bg"
             style="height: 90vh; max-height: 90vh; min-height: 90vh;"
-            @click="openModal(`/${pastCues[selectedPastCueIndex].image}`)"
+            @click="openModal(getPastCueImage(pastCues[selectedPastCueIndex]))"
           >
             <NuxtImg
-              :src="`/${pastCues[selectedPastCueIndex].image}`"
+              :src="getPastCueImage(pastCues[selectedPastCueIndex])"
               :alt="design.title"
               class="h-full w-auto object-contain"
               loading="eager"
@@ -144,10 +144,10 @@
             :key="`past-main-${index}`"
             class="flex items-center justify-center w-full overflow-clip cursor-pointer image-gradient-bg"
             :style="index === 0 ? 'height: 90vh; max-height: 90vh; min-height: 90vh;' : 'margin-top: 0.5rem;'"
-            @click="openModal(`/${pastCue.image}`)"
+            @click="openModal(getPastCueImage(pastCue))"
           >
             <NuxtImg
-              :src="`/${pastCue.image}`"
+              :src="getPastCueImage(pastCue)"
               :alt="design.title"
               :class="index === 0 ? 'h-full w-auto object-contain' : 'h-auto w-full max-h-[90vh] object-contain'"
               loading="eager"
@@ -212,7 +212,7 @@
     ? pathParts[2] // Keep as string to handle both numeric IDs and past cue IDs
     : null;
 
-  const { getDesignById, getCuesByDesignId, getPastCuesByDesignId, sortCues } = useCues();
+  const { getDesignById, getCuesByDesignId, getPastCuesByDesignId, sortCues, loading, designs } = useCues();
 
   const design = ref(null);
   const designCues = ref([]);
@@ -232,6 +232,35 @@
   const allImagesLoading = computed(() => {
     return designCues.value.length > 0 && loadedImages.value.size < totalImages.value;
   });
+
+  // Helper to get detail image URL (handles both array and object formats)
+  const getDetailImage = (cue, index) => {
+    if (!cue?.images?.details) return '';
+    const details = cue.images.details;
+    // Array format (Supabase)
+    if (Array.isArray(details)) {
+      return details[index] || '';
+    }
+    // Object format (old static data with 1-indexed keys)
+    return details[index + 1] || '';
+  };
+
+  // Helper to get past cue image URL
+  const getPastCueImage = (pastCue) => {
+    if (!pastCue) return '';
+    // Supabase format: images.main contains full URL
+    if (pastCue.images?.main) {
+      return pastCue.images.main;
+    }
+    // Backwards compatible format: image property with relative path
+    if (pastCue.image) {
+      if (pastCue.image.startsWith('http')) {
+        return pastCue.image;
+      }
+      return pastCue.image.startsWith('/') ? pastCue.image : `/${pastCue.image}`;
+    }
+    return '';
+  };
 
   // Modal functions
   const openModal = (imageSrc) => {
@@ -278,36 +307,31 @@
     }
   });
 
-  // Find the design and its cues
-  onMounted(() => {
+  // Initialize design data
+  const initializeDesign = () => {
     const foundDesign = getDesignById(designId);
     if (foundDesign) {
       design.value = foundDesign;
       const unsortedCues = getCuesByDesignId(designId);
-      // Sort cues: highlighted first, then by ID descending
       designCues.value = sortCues(unsortedCues);
       pastCues.value = getPastCuesByDesignId(designId);
 
       if (designCues.value.length > 0) {
-        // Check if cueId is in URL, otherwise use first cue
         if (cueIdFromUrl) {
-          // Try to find as regular cue (numeric ID)
           const numericId = parseInt(cueIdFromUrl);
           const cueExists = !isNaN(numericId) && designCues.value.find((cue) => cue.id === numericId);
           if (cueExists) {
             selectedCueId.value = numericId;
             viewMode.value = 'regular';
           } else {
-            // Check if it's a past cue ID (string match)
             const pastCueIndex = pastCues.value.findIndex(
-              (pastCue) => pastCue.id === cueIdFromUrl
+              (pastCue) => String(pastCue.id) === cueIdFromUrl
             );
             if (pastCueIndex !== -1) {
               selectedPastCueIndex.value = pastCueIndex;
               viewMode.value = 'past';
               selectedCueId.value = null;
             } else {
-              // Invalid ID, use first regular cue
               selectedCueId.value = designCues.value[0].id;
               viewMode.value = 'regular';
               navigateTo(`/design/${designId}/${designCues.value[0].id}`, { replace: true });
@@ -318,10 +342,9 @@
           viewMode.value = 'regular';
         }
       } else if (pastCues.value.length > 0) {
-        // If only past cues, check URL for past cue ID
         if (cueIdFromUrl) {
           const pastCueIndex = pastCues.value.findIndex(
-            (pastCue) => pastCue.id === cueIdFromUrl
+            (pastCue) => String(pastCue.id) === cueIdFromUrl
           );
           if (pastCueIndex !== -1) {
             selectedPastCueIndex.value = pastCueIndex;
@@ -333,13 +356,19 @@
         }
         viewMode.value = 'past';
       } else {
-        // Only show error if there are no cues and no past cues
         error.value = true;
       }
     } else {
       error.value = true;
     }
-  });
+  };
+
+  // Watch for data to load, then initialize
+  watch([loading, designs], ([newLoading, newDesigns]) => {
+    if (!newLoading && newDesigns.length > 0 && !design.value) {
+      initializeDesign();
+    }
+  }, { immediate: true });
 
   // Set page title
   useHead({

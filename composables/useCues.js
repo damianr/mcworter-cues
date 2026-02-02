@@ -1,668 +1,66 @@
 export default function useCues() {
-  // Designs are the high-level entities with title and description
-  const designs = ref([
-    {
-      id: "anniversary",
-      title: "20th Anniversary",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "florentine",
-      title: "Florentine",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "venetian",
-      title: "Venetian",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "victorian-crown",
-      title: "Victorian Crown",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "deco",
-      title: "Deco",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "royal",
-      title: "Royal",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "silver-smoke",
-      title: "Silver Smoke",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "engrave",
-      title: "Engrave",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "regal",
-      title: "Regal",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "points-interrupted",
-      title: "Point Interrupted",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "six-points",
-      title: "Six Point",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "ivory-crown",
-      title: "Ivory Crown",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "map",
-      title: "Texas Road Map",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "aztec",
-      title: "Aztec",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "pinnacle",
-      title: "Pinnacle",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "feather",
-      title: "Feather",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "razor",
-      title: "Razor",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "ten-point-crown",
-      title: "10 Point Crown",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "details",
-      title: "Details",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "squares",
-      title: "Squares",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "ptolemy",
-      title: "Ptolemy",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "victorian",
-      title: "Victorian",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "carnaval",
-      title: "Carnaval",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "feather-crown",
-      title: "Feather Crown",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "spaniard",
-      title: "Spaniard",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "piano",
-      title: "Piano",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "origami",
-      title: "Origami",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-  ]);
+  const nuxtApp = useNuxtApp();
 
-  // Cues are individual versions/iterations of a design
-  const cues = ref([
-    {
-      id: 202,
-      designId: "anniversary",
-      images: {
-        details: {
-          1: "images/202/details/1.png",
-          2: "images/202/details/2.png",
-        },
-        list: {
-          1: "images/202/list/1.png",
-          2: "images/202/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2335,
-      designId: "florentine",
-      images: {
-        details: {
-          1: "images/2335/details/1.png",
-          2: "images/2335/details/2.png",
-        },
-        list: {
-          1: "images/2335/list/1.png",
-          2: "images/2335/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2334,
-      designId: "florentine",
-      images: {
-        details: {
-          1: "images/2334/details/1.png",
-          2: "images/2334/details/2.png",
-        },
-        list: {
-          1: "images/2334/list/1.png",
-          2: "images/2334/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2311,
-      designId: "royal",
-      images: {
-        details: {
-          1: "images/2311/details/1.png",
-          2: "images/2311/details/2.png",
-        },
-        list: {
-          1: "images/2311/list/1.png",
-          2: "images/2311/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2333,
-      designId: "royal",
-      images: {
-        details: {
-          1: "images/2333/details/1.png",
-          2: "images/2333/details/2.png",
-        },
-        list: {
-          1: "images/2333/list/1.png",
-          2: "images/2333/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2312,
-      designId: "silver-smoke",
-      images: {
-        details: {
-          1: "images/2312/details/1.png",
-          2: "images/2312/details/2.png",
-        },
-        list: {
-          1: "images/2312/list/1.png",
-          2: "images/2312/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2337,
-      designId: "venetian",
-      images: {
-        details: {
-          1: "images/2337/details/1.png",
-          2: "images/2337/details/2.png",
-        },
-        list: {
-          1: "images/2337/list/1.png",
-          2: "images/2337/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2323,
-      designId: "venetian",
-      images: {
-        details: {
-          1: "images/2323/details/1.png",
-          2: "images/2323/details/2.png",
-        },
-        list: {
-          1: "images/2323/list/1.png",
-          2: "images/2323/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2290,
-      designId: "venetian",
-      images: {
-        details: {
-          1: "images/2290/details/1.png",
-          2: "images/2290/details/2.png",
-        },
-        list: {
-          1: "images/2290/list/1.png",
-          2: "images/2290/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2332,
-      designId: "deco",
-      images: {
-        details: {
-          1: "images/2332/details/1.png",
-          2: "images/2332/details/2.png",
-        },
-        list: {
-          1: "images/2332/list/1.png",
-          2: "images/2332/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2287,
-      designId: "deco",
-      images: {
-        details: {
-          1: "images/2287/details/1.png",
-          2: "images/2287/details/2.png",
-        },
-        list: {
-          1: "images/2287/list/1.png",
-          2: "images/2287/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2336,
-      designId: "regal",
-      images: {
-        details: {
-          1: "images/2336/details/1.png",
-          2: "images/2336/details/2.png",
-        },
-        list: {
-          1: "images/2336/list/1.png",
-          2: "images/2336/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2329,
-      designId: "points-interrupted",
-      images: {
-        details: {
-          1: "images/2329/details/1.png",
-          2: "images/2329/details/2.png",
-        },
-        list: {
-          1: "images/2329/list/1.png",
-          2: "images/2329/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2302,
-      designId: "points-interrupted",
-      images: {
-        details: {
-          1: "images/2302/details/1.png",
-          2: "images/2302/details/2.png",
-        },
-        list: {
-          1: "images/2302/list/1.png",
-          2: "images/2302/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2318,
-      designId: "victorian-crown",
-      highlight: true,
-      images: {
-        details: {
-          1: "images/2318/details/1.png",
-          2: "images/2318/details/2.png",
-        },
-        list: {
-          1: "images/2318/list/1.png",
-          2: "images/2318/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2341,
-      designId: "victorian-crown",
-      images: {
-        details: {
-          1: "images/2341/details/1.png",
-          2: "images/2341/details/2.png",
-        },
-        list: {
-          1: "images/2341/list/1.png",
-          2: "images/2341/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2291,
-      designId: "silver-smoke",
-      images: {
-        details: {
-          1: "images/2291/details/1.png",
-          2: "images/2291/details/2.png",
-        },
-        list: {
-          1: "images/2291/list/1.png",
-          2: "images/2291/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2293,
-      designId: "six-points",
-      images: {
-        details: {
-          1: "images/2293/details/1.png",
-          2: "images/2293/details/2.png",
-        },
-        list: {
-          1: "images/2293/list/1.png",
-          2: "images/2293/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2340,
-      designId: "ivory-crown",
-      images: {
-        details: {
-          1: "images/2340/details/1.png",
-          2: "images/2340/details/2.png",
-        },
-        list: {
-          1: "images/2340/list/1.png",
-          2: "images/2340/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2300,
-      designId: "engrave",
-      images: {
-        details: {
-          1: "images/2300/details/1.png",
-          2: "images/2300/details/2.png",
-        },
-        list: {
-          1: "images/2300/list/1.png",
-          2: "images/2300/list/2.png",
-        },
-      },
-    },
-    {
-      id: 1710,
-      designId: "map",
-      images: {
-        details: {
-          1: "images/1710/details/1.png",
-          2: "images/1710/details/2.png",
-        },
-        list: {
-          1: "images/1710/list/1.png",
-          2: "images/1710/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2047,
-      designId: "deco",
-      highlight: true,
-      images: {
-        details: {
-          1: "images/2047/details/1.png",
-          2: "images/2047/details/2.png",
-        },
-        list: {
-          1: "images/2047/list/1.png",
-          2: "images/2047/list/2.png",
-        },
-      },
-    },
-    {
-      id: 208,
-      designId: "anniversary",
-      images: {
-        details: {
-          1: "images/208/details/1.png",
-          2: "images/208/details/2.png",
-        },
-        list: {
-          1: "images/208/list/1.png",
-          2: "images/208/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2051,
-      designId: "aztec",
-      images: {
-        details: {
-          1: "images/2051/details/1.png",
-          2: "images/2051/details/2.png",
-        },
-        list: {
-          1: "images/2051/list/1.png",
-          2: "images/2051/list/2.png",
-        },
-      },
-    },
-    {
-      id: 2326,
-      designId: "pinnacle",
-      images: {
-        details: {
-          1: "images/2326/details/1.png",
-          2: "images/2326/details/2.png",
-        },
-        list: {
-          1: "images/2326/list/1.png",
-          2: "images/2326/list/2.png",
-        },
-      },
-    },
-    {
-      id: 1790,
-      designId: "feather",
-      images: {
-        details: {
-          1: "images/1790/details/1.png",
-          2: "images/1790/details/2.png",
-        },
-        list: {
-          1: "images/1790/list/1.png",
-          2: "images/1790/list/2.png",
-        },
-      },
-    },
-  ]);
+  // Reactive state for data from Supabase
+  const designs = ref([]);
+  const cues = ref([]);
+  const loading = ref(true);
+  const error = ref(null);
+  const initialized = ref(false);
 
-  // Past cues are older cues with single images
-  const pastCues = ref([
-    {
-      id: "1163",
-      image: "images/past-cues/1163.jpg",
-      designId: "ivory-crown",
-    },
-    {
-      id: "1167",
-      image: "images/past-cues/1167.jpg",
-      designId: "razor",
-    },
-    {
-      id: "1169",
-      image: "images/past-cues/1169.jpg",
-      designId: "ten-point-crown",
-    },
-    {
-      id: "1174",
-      image: "images/past-cues/1174.jpg",
-      designId: "ivory-crown",
-    },
-    {
-      id: "1246",
-      image: "images/past-cues/1246.jpg",
-      designId: "feather-crown",
-    },
-    {
-      id: "1250",
-      image: "images/past-cues/1250.jpg",
-      designId: "details",
-    },
-    {
-      id: "1252",
-      image: "images/past-cues/1252.jpg",
-      designId: "ivory-crown",
-    },
-    {
-      id: "1281",
-      image: "images/past-cues/1281.jpg",
-      designId: "squares",
-    },
-    {
-      id: "1287",
-      image: "images/past-cues/1287.jpg",
-      designId: "ptolemy",
-    },
-    {
-      id: "1290",
-      image: "images/past-cues/1290.jpg",
-      designId: "victorian",
-    },
-    {
-      id: "1444",
-      image: "images/past-cues/1444.jpg",
-      designId: "victorian",
-    },
-    {
-      id: "1449",
-      image: "images/past-cues/1449.jpg",
-      designId: "pinnacle",
-    },
-    {
-      id: "1453",
-      image: "images/past-cues/1453.jpg",
-      designId: "carnaval",
-    },
-    {
-      id: "1463",
-      image: "images/past-cues/1463.jpg",
-      designId: "feather-crown",
-    },
-    {
-      id: "1481",
-      image: "images/past-cues/1481.jpg",
-      designId: "ptolemy",
-    },
-    {
-      id: "1485",
-      image: "images/past-cues/1485.jpg",
-      designId: "ten-point-crown",
-    },
-    {
-      id: "1516",
-      image: "images/past-cues/1516.jpg",
-      designId: "spaniard",
-    },
-    {
-      id: "1523",
-      image: "images/past-cues/1523.jpg",
-      designId: "deco",
-    },
-    {
-      id: "1541",
-      image: "images/past-cues/1541.jpg",
-      designId: "deco",
-    },
-    {
-      id: "1543",
-      image: "images/past-cues/1543.jpg",
-      designId: "regal",
-    },
-    {
-      id: "1605",
-      image: "images/past-cues/1605.jpg",
-      designId: "venetian",
-    },
-    {
-      id: "1608",
-      image: "images/past-cues/1608.jpg",
-      designId: "points-interrupted",
-    },
-    {
-      id: "1625",
-      image: "images/past-cues/1625.jpg",
-      designId: "west-palm",
-    },
-    {
-      id: "1716",
-      image: "images/past-cues/1716.jpeg",
-      designId: "origami",
-    },
-    {
-      id: "1772",
-      image: "images/past-cues/1772.jpg",
-      designId: "six-points",
-    },
-  ]);
+  // Fetch data from Supabase
+  const fetchData = async () => {
+    if (initialized.value) return;
+
+    const $supabase = nuxtApp.$supabase;
+
+    // Handle SSR - Supabase client only available on client
+    if (!$supabase) {
+      if (import.meta.server) {
+        loading.value = true;
+        return;
+      }
+      console.error("Supabase client not initialized");
+      error.value = "Supabase client not available";
+      loading.value = false;
+      return;
+    }
+
+    loading.value = true;
+    error.value = null;
+
+    try {
+      // Fetch designs
+      const { data: designsData, error: designsError } = await $supabase
+        .from("designs")
+        .select("*")
+        .order("title");
+
+      if (designsError) throw designsError;
+
+      // Fetch cues
+      const { data: cuesData, error: cuesError } = await $supabase
+        .from("cues")
+        .select("*")
+        .order("id", { ascending: false });
+
+      if (cuesError) throw cuesError;
+
+      designs.value = designsData || [];
+      cues.value = cuesData || [];
+      initialized.value = true;
+    } catch (e) {
+      console.error("Error fetching data from Supabase:", e);
+      error.value = e.message;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  // Only fetch on client side
+  if (import.meta.client) {
+    fetchData();
+  }
 
   // Get all designs
   const getAllDesigns = () => designs.value;
@@ -672,8 +70,8 @@ export default function useCues() {
     return designs.value.find((design) => design.id === id);
   };
 
-  // Get all cues
-  const getAllCues = () => cues.value;
+  // Get all cues (excluding past cues)
+  const getAllCues = () => cues.value.filter((cue) => !cue.is_past_cue);
 
   // Get a single cue by ID
   const getCueById = (id) => {
@@ -685,39 +83,42 @@ export default function useCues() {
     const cue = getCueById(id);
     if (!cue) return null;
 
-    const design = getDesignById(cue.designId);
+    const design = getDesignById(cue.design_id);
     return {
       ...cue,
+      designId: cue.design_id,
       title: design?.title,
       description: design?.description,
     };
   };
 
-  // Get all cues for a specific design
+  // Get all cues for a specific design (excluding past cues)
   const getCuesByDesignId = (designId) => {
-    return cues.value.filter((cue) => cue.designId === designId);
+    return cues.value.filter(
+      (cue) => cue.design_id === designId && !cue.is_past_cue
+    );
   };
 
   // Sort cues: highlighted first, then by ID descending
   const sortCues = (cuesArray) => {
     return [...cuesArray].sort((a, b) => {
-      // First, sort by highlight (highlighted cues come first)
       const aHighlight = a.highlight ? 1 : 0;
       const bHighlight = b.highlight ? 1 : 0;
       if (aHighlight !== bHighlight) {
-        return bHighlight - aHighlight; // Highlighted first
+        return bHighlight - aHighlight;
       }
-      // Then sort by ID descending
       return b.id - a.id;
     });
   };
 
   // Get designs by array of design IDs
   const getDesignsByIds = (ids) => {
-    return ids.map((id) => designs.value.find((design) => design.id === id)).filter(Boolean);
+    return ids
+      .map((id) => designs.value.find((design) => design.id === id))
+      .filter(Boolean);
   };
 
-  // Get the latest (or first) cue for each design by design IDs
+  // Get the latest cue for each design by design IDs
   const getLatestCuesByDesignIds = (designIds) => {
     return designIds
       .map((designId) => {
@@ -727,7 +128,6 @@ export default function useCues() {
         const designCues = getCuesByDesignId(designId);
         if (designCues.length === 0) return null;
 
-        // Get the cue with the largest ID
         const latestCue = designCues.reduce(
           (max, cue) => (cue.id > max.id ? cue : max),
           designCues[0]
@@ -735,6 +135,7 @@ export default function useCues() {
 
         return {
           ...latestCue,
+          designId: latestCue.design_id,
           title: design.title,
           description: design.description,
         };
@@ -752,31 +153,72 @@ export default function useCues() {
         const designCues = getCuesByDesignId(designId);
         if (designCues.length === 0) return null;
 
-        // Sort cues: highlighted first, then by ID descending
         const sortedCues = sortCues(designCues);
+
+        // Map cues to include designId for backwards compatibility
+        const mappedCues = sortedCues.map((cue) => ({
+          ...cue,
+          designId: cue.design_id,
+        }));
 
         return {
           designId: design.id,
           title: design.title,
           description: design.description,
-          cues: sortedCues,
+          cues: mappedCues,
         };
       })
       .filter(Boolean);
   };
 
-  // Get all past cues
-  const getAllPastCues = () => pastCues.value;
+  // Get all past cues (with backwards compatible 'image' property)
+  const getAllPastCues = () => {
+    return cues.value
+      .filter((cue) => cue.is_past_cue)
+      .map((cue) => ({
+        ...cue,
+        designId: cue.design_id,
+        // Map images.main to image for backwards compatibility
+        image: cue.images?.main || null,
+      }));
+  };
 
   // Get past cues for a specific design
   const getPastCuesByDesignId = (designId) => {
-    return pastCues.value.filter((cue) => cue.designId === designId);
+    return cues.value
+      .filter((cue) => cue.design_id === designId && cue.is_past_cue)
+      .map((cue) => ({
+        ...cue,
+        designId: cue.design_id,
+        image: cue.images?.main || null,
+      }));
+  };
+
+  // Helper to get image URL from cue images object
+  const getImageUrl = (cue, type, index = 0) => {
+    if (!cue?.images) return null;
+
+    if (type === "main") {
+      return cue.images.main || null;
+    }
+
+    const imageArray = cue.images[type];
+    if (!imageArray || !Array.isArray(imageArray)) return null;
+
+    return imageArray[index] || null;
+  };
+
+  // Refresh data from Supabase
+  const refresh = () => {
+    initialized.value = false;
+    return fetchData();
   };
 
   return {
-    designs: readonly(designs),
-    cues: readonly(cues),
-    pastCues: readonly(pastCues),
+    designs,
+    cues,
+    loading,
+    error,
     getAllDesigns,
     getDesignById,
     getAllCues,
@@ -788,6 +230,8 @@ export default function useCues() {
     getDesignsWithAllCues,
     getAllPastCues,
     getPastCuesByDesignId,
+    getImageUrl,
     sortCues,
+    refresh,
   };
 }

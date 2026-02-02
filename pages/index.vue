@@ -109,14 +109,14 @@
     <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8 max-w-5xl mx-auto">
       <div
         v-for="cue in pastCues"
-        :key="cue.image"
+        :key="cue.id"
         class="cursor-pointer"
-        @click="cue.designId ? navigateToDesign(cue.designId) : openModal(cue.image)"
+        @click="cue.designId ? navigateToDesign(cue.designId) : openModal(getPastCueImage(cue))"
       >
         <div class="overflow-hidden rounded mb-2">
           <NuxtImg
-            :src="`/${cue.image}`"
-            :alt="`Past cue ${cue.image}`"
+            :src="getPastCueImage(cue)"
+            :alt="`Past cue ${cue.id}`"
             class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300"
             loading="lazy"
           />
@@ -144,8 +144,8 @@
           ×
         </button>
         <NuxtImg
-          :src="`/${selectedImage}`"
-          :alt="`Past cue ${selectedImage}`"
+          :src="selectedImage"
+          alt="Past cue"
           class="max-w-full max-h-full object-contain"
           @click.stop
         />
@@ -155,8 +155,7 @@
 </template>
 
 <script setup>
-  const { getAllPastCues, getDesignById } = useCues();
-  const allPastCues = getAllPastCues();
+  const { getAllPastCues, getDesignById, loading } = useCues();
 
   // Design IDs that are already displayed in CueSection components
   const displayedDesignIds = [
@@ -180,13 +179,31 @@
 
   // Filter past cues to only show those whose design isn't already displayed
   const pastCues = computed(() => {
+    const allPastCues = getAllPastCues();
     return allPastCues.filter((cue) => !displayedDesignIds.includes(cue.designId));
   });
 
+  // Helper to get past cue image URL
+  const getPastCueImage = (pastCue) => {
+    if (!pastCue) return '';
+    // Supabase format: images.main contains full URL
+    if (pastCue.images?.main) {
+      return pastCue.images.main;
+    }
+    // Backwards compatible format: image property
+    if (pastCue.image) {
+      if (pastCue.image.startsWith('http')) {
+        return pastCue.image;
+      }
+      return pastCue.image.startsWith('/') ? pastCue.image : `/${pastCue.image}`;
+    }
+    return '';
+  };
+
   const selectedImage = ref(null);
 
-  const openModal = (cue) => {
-    selectedImage.value = cue;
+  const openModal = (imageUrl) => {
+    selectedImage.value = imageUrl;
   };
 
   const closeModal = () => {
