@@ -53,11 +53,10 @@
         </button>
       </div>
 
-      <!-- Cue Form -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- Left: Upload & Annotation -->
-        <div class="space-y-6">
-          <!-- Design Selection -->
+      <!-- Cue Form - Single Column Layout -->
+      <div class="space-y-6">
+        <!-- Row 1: Design & Cue ID side by side -->
+        <div class="grid grid-cols-2 gap-4">
           <div>
             <label class="block text-sm text-ink-100 mb-2">Design</label>
             <select
@@ -70,8 +69,6 @@
               </option>
             </select>
           </div>
-
-          <!-- Cue ID -->
           <div>
             <label class="block text-sm text-ink-100 mb-2">Cue ID</label>
             <input
@@ -81,147 +78,175 @@
               placeholder="e.g. 2345"
             />
           </div>
+        </div>
 
-          <!-- Image Upload -->
-          <div>
-            <label class="block text-sm text-ink-100 mb-2">Full Cue Image</label>
-            <div
-              class="border-2 border-dashed border-ink-200 rounded-lg p-8 text-center cursor-pointer hover:border-ink transition-colors"
-              @click="triggerFileInput"
-              @dragover.prevent
-              @drop.prevent="handleDrop"
-            >
-              <input
-                ref="fileInput"
-                type="file"
-                accept="image/*"
-                class="hidden"
-                @change="handleFileSelect"
-              />
-              <p v-if="!sourceImage" class="text-ink-100">
-                Click or drag to upload full cue image
-              </p>
-              <p v-else class="text-ink">
-                {{ sourceImage.name }} ({{ formatFileSize(sourceImage.size) }})
-              </p>
-            </div>
-          </div>
-
-          <!-- Landmark Annotation -->
-          <div v-if="imageUrl" class="space-y-4">
-            <div class="flex justify-between items-center">
-              <label class="block text-sm text-ink-100">
-                Click to mark wrap boundaries ({{ landmarks.length }}/2)
-              </label>
-              <button
-                v-if="landmarks.length > 0"
-                @click="clearLandmarks"
-                class="text-xs text-ink-100 hover:text-ink underline"
-              >
-                Clear
-              </button>
-            </div>
-            
-            <div 
-              ref="imageContainer"
-              class="relative cursor-crosshair border border-ink-200 rounded-lg overflow-hidden"
-              @click="handleImageClick"
-            >
-              <img
-                ref="annotationImage"
-                :src="imageUrl"
-                alt="Full cue"
-                class="w-full h-auto"
-                @load="onImageLoad"
-              />
-              <!-- Landmark markers -->
-              <div
-                v-for="(landmark, index) in landmarks"
-                :key="index"
-                class="absolute w-4 h-4 -ml-2 -mt-2 rounded-full border-2 border-white bg-red-500 shadow-lg"
-                :style="{ left: `${landmark.xPercent}%`, top: `${landmark.yPercent}%` }"
-              >
-                <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-xs text-white bg-red-500 px-1 rounded">
-                  {{ index === 0 ? 'Start' : 'End' }}
-                </span>
-              </div>
-              <!-- Line between landmarks -->
-              <svg
-                v-if="landmarks.length === 2"
-                class="absolute inset-0 w-full h-full pointer-events-none"
-              >
-                <line
-                  :x1="`${landmarks[0].xPercent}%`"
-                  :y1="`${landmarks[0].yPercent}%`"
-                  :x2="`${landmarks[1].xPercent}%`"
-                  :y2="`${landmarks[1].yPercent}%`"
-                  stroke="white"
-                  stroke-width="2"
-                  stroke-dasharray="5,5"
-                />
-              </svg>
-            </div>
-            
-            <p class="text-xs text-ink-200">
-              Mark the start and end of the wrap section
+        <!-- Row 2: Image Upload -->
+        <div>
+          <label class="block text-sm text-ink-100 mb-2">Full Cue Image</label>
+          <div
+            class="border-2 border-dashed border-ink-200 rounded-lg p-8 text-center cursor-pointer hover:border-ink transition-colors"
+            @click="triggerFileInput"
+            @dragover.prevent
+            @drop.prevent="handleDrop"
+          >
+            <input
+              ref="fileInput"
+              type="file"
+              accept="image/*"
+              class="hidden"
+              @change="handleFileSelect"
+            />
+            <p v-if="!sourceImage" class="text-ink-100">
+              Click or drag to upload full cue image
+            </p>
+            <p v-else class="text-ink">
+              {{ sourceImage.name }} ({{ formatFileSize(sourceImage.size) }})
             </p>
           </div>
         </div>
 
-        <!-- Right: Preview -->
-        <div class="space-y-6">
-          <h2 class="text-lg font-medium">Generated Images Preview</h2>
-          
-          <div v-if="!canGenerate" class="text-ink-100 text-sm">
-            Upload an image and mark both wrap boundaries to preview generated images.
-          </div>
-          
-          <div v-else class="space-y-6">
-            <!-- List Images Preview -->
-            <div>
-              <h3 class="text-sm text-ink-100 mb-2">List Images (Homepage)</h3>
-              <div class="space-y-2">
-                <div class="bg-bg-100 rounded-lg p-2">
-                  <canvas ref="listCanvas1" class="w-full h-auto"></canvas>
-                  <p class="text-xs text-ink-200 mt-1">Full cue (list/0)</p>
-                </div>
-                <div class="bg-bg-100 rounded-lg p-2">
-                  <canvas ref="listCanvas2" class="w-full h-auto"></canvas>
-                  <p class="text-xs text-ink-200 mt-1">Cropped (list/1)</p>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Detail Images Preview -->
-            <div>
-              <h3 class="text-sm text-ink-100 mb-2">Detail Images (Detail Page)</h3>
-              <div class="grid grid-cols-2 gap-2">
-                <div class="bg-bg-100 rounded-lg p-2">
-                  <canvas ref="detailCanvas1" class="w-full h-auto"></canvas>
-                  <p class="text-xs text-ink-200 mt-1">Angled composite (details/0)</p>
-                </div>
-                <div class="bg-bg-100 rounded-lg p-2">
-                  <canvas ref="detailCanvas2" class="w-full h-auto"></canvas>
-                  <p class="text-xs text-ink-200 mt-1">Full horizontal (details/1)</p>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Generate Button -->
+        <!-- Row 3: Uploaded Image with Landmark Annotation -->
+        <div v-if="imageUrl" class="space-y-4">
+          <div class="flex justify-between items-center">
+            <label class="block text-sm text-ink-100">
+              Click to mark wrap boundaries ({{ landmarks.length }}/2)
+            </label>
             <button
-              @click="generateAndSave"
-              :disabled="saving || !canSave"
-              class="w-full py-3 bg-ink text-bg font-medium rounded-lg hover:bg-ink-100 transition-colors disabled:opacity-50"
+              v-if="landmarks.length > 0"
+              @click="clearLandmarks"
+              class="text-xs text-ink-100 hover:text-ink underline"
             >
-              {{ saving ? 'Saving...' : 'Generate & Save Cue' }}
+              Clear
             </button>
-            
-            <p v-if="saveError" class="text-red-400 text-sm">{{ saveError }}</p>
-            <p v-if="saveSuccess" class="text-green-400 text-sm">Cue saved successfully!</p>
           </div>
+          
+          <div 
+            ref="imageContainer"
+            class="relative cursor-crosshair border border-ink-200 rounded-lg overflow-hidden"
+            @click="handleImageClick"
+          >
+            <img
+              ref="annotationImage"
+              :src="imageUrl"
+              alt="Full cue"
+              class="w-full h-auto"
+              @load="onImageLoad"
+            />
+            <!-- Landmark markers -->
+            <div
+              v-for="(landmark, index) in landmarks"
+              :key="index"
+              class="absolute w-4 h-4 -ml-2 -mt-2 rounded-full border-2 border-white bg-red-500 shadow-lg"
+              :style="{ left: `${landmark.xPercent}%`, top: `${landmark.yPercent}%` }"
+            >
+              <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-xs text-white bg-red-500 px-1 rounded">
+                {{ index === 0 ? 'Start' : 'End' }}
+              </span>
+            </div>
+            <!-- Line between landmarks -->
+            <svg
+              v-if="landmarks.length === 2"
+              class="absolute inset-0 w-full h-full pointer-events-none"
+            >
+              <line
+                :x1="`${landmarks[0].xPercent}%`"
+                :y1="`${landmarks[0].yPercent}%`"
+                :x2="`${landmarks[1].xPercent}%`"
+                :y2="`${landmarks[1].yPercent}%`"
+                stroke="white"
+                stroke-width="2"
+                stroke-dasharray="5,5"
+              />
+            </svg>
+          </div>
+          
+          <p class="text-xs text-ink-200">
+            Mark the start and end of the wrap section
+          </p>
+        </div>
+
+        <!-- Row 4: Generated Images Preview -->
+        <div v-if="canGenerate" class="space-y-4">
+          <h2 class="text-lg font-medium">Generated Images Preview</h2>
+          <p class="text-xs text-ink-200">Click any image to view full size</p>
+          
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- List Image 1 -->
+            <div 
+              class="bg-bg-100 rounded-lg p-2 cursor-pointer hover:bg-bg-200 transition-colors"
+              @click="openPreviewModal('list1')"
+            >
+              <canvas ref="listCanvas1" class="w-full h-auto"></canvas>
+              <p class="text-xs text-ink-200 mt-1">Full cue (list/0)</p>
+            </div>
+            
+            <!-- List Image 2 -->
+            <div 
+              class="bg-bg-100 rounded-lg p-2 cursor-pointer hover:bg-bg-200 transition-colors"
+              @click="openPreviewModal('list2')"
+            >
+              <canvas ref="listCanvas2" class="w-full h-auto"></canvas>
+              <p class="text-xs text-ink-200 mt-1">Cropped (list/1)</p>
+            </div>
+            
+            <!-- Detail Image 1 -->
+            <div 
+              class="bg-bg-100 rounded-lg p-2 cursor-pointer hover:bg-bg-200 transition-colors"
+              @click="openPreviewModal('detail1')"
+            >
+              <canvas ref="detailCanvas1" class="w-full h-auto"></canvas>
+              <p class="text-xs text-ink-200 mt-1">Angled (details/0)</p>
+            </div>
+            
+            <!-- Detail Image 2 -->
+            <div 
+              class="bg-bg-100 rounded-lg p-2 cursor-pointer hover:bg-bg-200 transition-colors"
+              @click="openPreviewModal('detail2')"
+            >
+              <canvas ref="detailCanvas2" class="w-full h-auto"></canvas>
+              <p class="text-xs text-ink-200 mt-1">Horizontal (details/1)</p>
+            </div>
+          </div>
+          
+          <!-- Generate Button -->
+          <button
+            @click="generateAndSave"
+            :disabled="saving || !canSave"
+            class="w-full py-3 bg-ink text-bg font-medium rounded-lg hover:bg-ink-100 transition-colors disabled:opacity-50"
+          >
+            {{ saving ? 'Saving...' : 'Generate & Save Cue' }}
+          </button>
+          
+          <p v-if="saveError" class="text-red-400 text-sm">{{ saveError }}</p>
+          <p v-if="saveSuccess" class="text-green-400 text-sm">Cue saved successfully!</p>
         </div>
       </div>
     </div>
+
+    <!-- Preview Modal -->
+    <Teleport to="body">
+      <Transition name="modal">
+        <div
+          v-if="previewModalImage"
+          class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90"
+          @click="closePreviewModal"
+        >
+          <button
+            class="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition-colors z-10"
+            @click="closePreviewModal"
+            aria-label="Close modal"
+          >
+            ×
+          </button>
+          <img
+            :src="previewModalImage"
+            alt="Preview"
+            class="max-w-full max-h-full object-contain"
+            @click.stop
+          />
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 
@@ -255,6 +280,9 @@ const detailCanvas2 = ref(null);
 const saving = ref(false);
 const saveError = ref('');
 const saveSuccess = ref(false);
+
+// Preview modal state
+const previewModalImage = ref(null);
 
 // Get designs
 const designs = computed(() => getAllDesigns());
@@ -344,6 +372,32 @@ const clearLandmarks = () => {
   landmarks.value = [];
 };
 
+// Preview modal handlers
+const openPreviewModal = (canvasType) => {
+  let canvas;
+  switch (canvasType) {
+    case 'list1':
+      canvas = listCanvas1.value;
+      break;
+    case 'list2':
+      canvas = listCanvas2.value;
+      break;
+    case 'detail1':
+      canvas = detailCanvas1.value;
+      break;
+    case 'detail2':
+      canvas = detailCanvas2.value;
+      break;
+  }
+  if (canvas) {
+    previewModalImage.value = canvas.toDataURL('image/png');
+  }
+};
+
+const closePreviewModal = () => {
+  previewModalImage.value = null;
+};
+
 // Generate preview images
 const generatePreviews = () => {
   if (!canGenerate.value) return;
@@ -387,22 +441,42 @@ const generateListImage2 = (img, wrapStart, wrapEnd) => {
   
   const ctx = canvas.getContext('2d');
   
-  // Crop to show wrap area with some padding
-  const padding = 0.1; // 10% padding on each side
-  const cropStart = Math.max(0, wrapStart - padding);
-  const cropEnd = Math.min(1, wrapEnd + padding);
+  // List/1: Nose section at angle, with cue appearing to "run off" the left edge
+  // Strategy: rotate the full image, then use canvas bounds to crop with straight edges
+  const angle = -8 * (Math.PI / 180);
+  const absAngle = Math.abs(angle);
   
-  const srcX = cropStart * img.naturalWidth;
-  const srcWidth = (cropEnd - cropStart) * img.naturalWidth;
+  // We want to show from just into the wrap to the nose tip (right edge)
+  const wrapPadding = 0.02; // Show only 2% into the wrap
+  const visibleStart = wrapEnd - wrapPadding; // Where we want the left edge to cut
+  const visibleWidth = 1 - visibleStart; // Proportion of image we want visible
   
-  canvas.width = srcWidth;
-  canvas.height = img.naturalHeight;
+  // Calculate canvas size based on the visible portion after rotation
+  const visiblePixelWidth = visibleWidth * img.naturalWidth;
+  const canvasWidth = visiblePixelWidth * Math.cos(absAngle) + img.naturalHeight * Math.sin(absAngle);
+  const canvasHeight = visiblePixelWidth * Math.sin(absAngle) + img.naturalHeight * Math.cos(absAngle);
   
+  canvas.width = Math.ceil(canvasWidth);
+  canvas.height = Math.ceil(canvasHeight);
+  
+  // Transparent background
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Rotate and position so:
+  // - The nose tip (right of source) is at the right edge of canvas
+  // - The cue runs off the left edge (cut by straight canvas boundary)
+  ctx.save();
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  ctx.rotate(angle);
+  
+  // Position the full image so the right side (nose) is visible
+  // and left side extends beyond canvas (gets clipped)
+  const offsetX = (img.naturalWidth / 2) - (visibleStart * img.naturalWidth) - (visiblePixelWidth / 2);
   ctx.drawImage(
     img,
-    srcX, 0, srcWidth, img.naturalHeight,
-    0, 0, srcWidth, img.naturalHeight
+    -img.naturalWidth / 2 + offsetX, -img.naturalHeight / 2
   );
+  ctx.restore();
 };
 
 const generateDetailImage1 = (img, noseEnd, buttStart) => {
@@ -411,44 +485,73 @@ const generateDetailImage1 = (img, noseEnd, buttStart) => {
   
   const ctx = canvas.getContext('2d');
   
-  // Extract nose section (left part up to wrap start)
-  const noseWidth = noseEnd * img.naturalWidth;
+  // Details/0: Nose on left, butt on right, both leaning RIGHT
+  // Strategy: Create composite of both sections, then rotate the whole thing
+  const angle = 18 * (Math.PI / 180); // Reduced from 25° to 18°
   
-  // Extract butt section (right part from wrap end)
-  const buttX = buttStart * img.naturalWidth;
-  const buttWidth = img.naturalWidth - buttX;
+  // NOSE section: RIGHT side of source (from wrap end to tip) + MORE wrap
+  const nosePadding = 0.12; // More wrap showing
+  const noseStartX = (buttStart - nosePadding) * img.naturalWidth;
+  const noseWidth = img.naturalWidth - noseStartX;
   
-  // Calculate canvas size for angled composition
-  const angle = 15 * (Math.PI / 180); // 15 degrees
-  const canvasWidth = Math.max(noseWidth, buttWidth) * 1.5;
-  const canvasHeight = img.naturalHeight * 3;
+  // BUTT section: LEFT side of source (handle to wrap start) + EVEN MORE wrap  
+  const buttPadding = 0.35; // Increased from 0.25 to show more wrap and run off edge
+  const buttEndX = (noseEnd + buttPadding) * img.naturalWidth;
+  const buttWidth = buttEndX;
   
-  canvas.width = canvasWidth;
-  canvas.height = canvasHeight;
+  // Gap between sections (before rotation)
+  const gap = 30; // Increased by 50%
   
-  ctx.fillStyle = '#1a1a1a';
-  ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+  // Create composite dimensions (both sections side by side, vertically oriented)
+  const compositeWidth = img.naturalHeight * 2 + gap;
+  const compositeHeight = Math.max(noseWidth, buttWidth);
   
-  // Draw nose section (angled)
+  // Final canvas size after rotating the composite
+  const rotatedWidth = compositeWidth * Math.cos(angle) + compositeHeight * Math.sin(angle);
+  const rotatedHeight = compositeWidth * Math.sin(angle) + compositeHeight * Math.cos(angle);
+  
+  // Crop canvas: remove from top (nose closer to top) and a bit from bottom
+  const cropTop = rotatedHeight * 0.12; // Crop 12% from top
+  const cropBottom = rotatedHeight * 0.05; // Crop 5% from bottom
+  
+  canvas.width = Math.ceil(rotatedWidth);
+  canvas.height = Math.ceil(rotatedHeight - cropTop - cropBottom);
+  
+  // Transparent background
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Rotate entire canvas, then draw both sections
+  // Offset to account for top/bottom cropping
   ctx.save();
-  ctx.translate(canvasWidth * 0.5, canvasHeight * 0.25);
-  ctx.rotate(-angle);
+  ctx.translate(canvas.width / 2, canvas.height / 2 - cropTop / 2 + cropBottom / 2);
+  ctx.rotate(angle);
+  
+  // Draw NOSE on left (rotated 90° CCW so tip points up)
+  // Offset down so it runs off bottom after rotation
+  const noseVerticalOffset = noseWidth * 0.15; // Push down
+  ctx.save();
+  ctx.translate(-compositeWidth / 2 + img.naturalHeight / 2, noseVerticalOffset);
+  ctx.rotate(-Math.PI / 2);
   ctx.drawImage(
     img,
-    0, 0, noseWidth, img.naturalHeight,
+    noseStartX, 0, noseWidth, img.naturalHeight,
     -noseWidth / 2, -img.naturalHeight / 2, noseWidth, img.naturalHeight
   );
   ctx.restore();
   
-  // Draw butt section (angled opposite)
+  // Draw BUTT on right (rotated 90° CCW so handle points down)
+  // Offset UP so wrap start is closer to center, handle runs off top
+  const buttVerticalOffset = -buttWidth * 0.28; // Push up more
   ctx.save();
-  ctx.translate(canvasWidth * 0.5, canvasHeight * 0.75);
-  ctx.rotate(angle);
+  ctx.translate(compositeWidth / 2 - img.naturalHeight / 2, buttVerticalOffset);
+  ctx.rotate(-Math.PI / 2);
   ctx.drawImage(
     img,
-    buttX, 0, buttWidth, img.naturalHeight,
+    0, 0, buttWidth, img.naturalHeight,
     -buttWidth / 2, -img.naturalHeight / 2, buttWidth, img.naturalHeight
   );
+  ctx.restore();
+  
   ctx.restore();
 };
 
@@ -457,9 +560,33 @@ const generateDetailImage2 = (img) => {
   if (!canvas) return;
   
   const ctx = canvas.getContext('2d');
-  canvas.width = img.naturalWidth;
-  canvas.height = img.naturalHeight;
-  ctx.drawImage(img, 0, 0);
+  
+  // Details/1: Full cue at slight angle (~8 degrees), left LOW, right HIGH
+  // Large enough for full-size viewing - negative angle
+  const angle = -8 * (Math.PI / 180);
+  
+  // Calculate canvas size to fit rotated full image with padding
+  const absAngle = Math.abs(angle);
+  const rotatedWidth = img.naturalWidth * Math.cos(absAngle) + img.naturalHeight * Math.sin(absAngle);
+  const rotatedHeight = img.naturalWidth * Math.sin(absAngle) + img.naturalHeight * Math.cos(absAngle);
+  
+  // Minimal padding, transparent background
+  const padding = 10;
+  canvas.width = Math.ceil(rotatedWidth + padding * 2);
+  canvas.height = Math.ceil(rotatedHeight + padding * 2);
+  
+  // Transparent background
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Rotate and draw full cue - left LOW, right HIGH
+  ctx.save();
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  ctx.rotate(angle);
+  ctx.drawImage(
+    img,
+    -img.naturalWidth / 2, -img.naturalHeight / 2
+  );
+  ctx.restore();
 };
 
 // Format file size
