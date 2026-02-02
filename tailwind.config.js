@@ -18,6 +18,22 @@ module.exports = {
       "ink-100": "#AFAFAF",
       "ink-200": "#777777",
 
+      // Status colors
+      yellow: {
+        400: "#FACC15",
+        500: "#EAB308",
+        600: "#CA8A04",
+      },
+      green: {
+        400: "#4ADE80",
+        500: "#22C55E",
+        600: "#16A34A",
+      },
+      red: {
+        400: "#F87171",
+        500: "#EF4444",
+      },
+
       // Keep transparent and current for utilities
       transparent: "transparent",
       current: "currentColor",

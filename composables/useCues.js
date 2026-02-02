@@ -94,9 +94,7 @@ export default function useCues() {
 
   // Get all cues for a specific design (excluding past cues)
   const getCuesByDesignId = (designId) => {
-    return cues.value.filter(
-      (cue) => cue.design_id === designId && !cue.is_past_cue
-    );
+    return cues.value.filter((cue) => cue.design_id === designId && !cue.is_past_cue);
   };
 
   // Sort cues: highlighted first, then by ID descending
@@ -113,9 +111,7 @@ export default function useCues() {
 
   // Get designs by array of design IDs
   const getDesignsByIds = (ids) => {
-    return ids
-      .map((id) => designs.value.find((design) => design.id === id))
-      .filter(Boolean);
+    return ids.map((id) => designs.value.find((design) => design.id === id)).filter(Boolean);
   };
 
   // Get the latest cue for each design by design IDs
@@ -211,21 +207,21 @@ export default function useCues() {
   // Transform Supabase storage URL to use image transformation endpoint
   // This resizes images on-the-fly for faster loading
   const getOptimizedImageUrl = (url, options = {}) => {
-    if (!url) return '';
-    
+    if (!url) return "";
+
     // Only transform Supabase storage URLs
-    if (!url.includes('supabase.co/storage/v1/object/public/')) {
+    if (!url.includes("supabase.co/storage/v1/object/public/")) {
       return url;
     }
-    
+
     const { width = 1200, quality = 80 } = options;
-    
+
     // Convert from /object/public/ to /render/image/public/
     const transformedUrl = url.replace(
-      '/storage/v1/object/public/',
-      '/storage/v1/render/image/public/'
+      "/storage/v1/object/public/",
+      "/storage/v1/render/image/public/"
     );
-    
+
     // Add transformation parameters
     // resize=contain ensures proportional scaling without cropping
     return `${transformedUrl}?width=${width}&quality=${quality}&resize=contain`;
@@ -235,6 +231,48 @@ export default function useCues() {
   const refresh = () => {
     initialized.value = false;
     return fetchData();
+  };
+
+  // Publish a cue (set published = true)
+  const publishCue = async (cueId) => {
+    const $supabase = nuxtApp.$supabase;
+    if (!$supabase) throw new Error("Supabase not initialized");
+
+    const { error: updateError } = await $supabase
+      .from("cues")
+      .update({ published: true })
+      .eq("id", cueId);
+
+    if (updateError) throw updateError;
+
+    // Update local state
+    const cueIndex = cues.value.findIndex((c) => c.id === cueId);
+    if (cueIndex !== -1) {
+      cues.value[cueIndex].published = true;
+    }
+
+    return true;
+  };
+
+  // Unpublish a cue (set published = false)
+  const unpublishCue = async (cueId) => {
+    const $supabase = nuxtApp.$supabase;
+    if (!$supabase) throw new Error("Supabase not initialized");
+
+    const { error: updateError } = await $supabase
+      .from("cues")
+      .update({ published: false })
+      .eq("id", cueId);
+
+    if (updateError) throw updateError;
+
+    // Update local state
+    const cueIndex = cues.value.findIndex((c) => c.id === cueId);
+    if (cueIndex !== -1) {
+      cues.value[cueIndex].published = false;
+    }
+
+    return true;
   };
 
   return {
@@ -257,5 +295,7 @@ export default function useCues() {
     getOptimizedImageUrl,
     sortCues,
     refresh,
+    publishCue,
+    unpublishCue,
   };
 }

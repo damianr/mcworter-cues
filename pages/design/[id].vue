@@ -24,6 +24,39 @@
             {{ design.description }}
           </p> -->
 
+          <!-- Publish status banner (admin only) -->
+          <div
+            v-if="isAuthenticated && selectedCue"
+            class="mt-4 p-3 rounded-lg border"
+            :style="{
+              backgroundColor: isUnpublished ? 'rgba(202, 138, 4, 0.2)' : 'rgba(22, 163, 74, 0.2)',
+              borderColor: isUnpublished ? 'rgba(202, 138, 4, 0.5)' : 'rgba(22, 163, 74, 0.5)'
+            }"
+          >
+            <div class="flex items-center justify-between gap-4">
+              <span :class="isUnpublished ? 'text-yellow-400' : 'text-green-400'" class="text-sm">
+                {{ isUnpublished ? 'Unpublished - only visible to admins' : 'Published - visible to everyone' }}
+              </span>
+              <button
+                v-if="isUnpublished"
+                @click="handlePublish"
+                :disabled="publishing"
+                class="px-4 py-2 bg-green-600 text-ink text-sm font-medium rounded hover:bg-green-500 transition-colors disabled:opacity-50"
+              >
+                {{ publishing ? "Publishing..." : "Publish" }}
+              </button>
+              <button
+                v-else
+                @click="handleUnpublish"
+                :disabled="publishing"
+                class="px-4 py-2 bg-yellow-600 text-ink text-sm font-medium rounded hover:bg-yellow-500 transition-colors disabled:opacity-50"
+              >
+                {{ publishing ? "Unpublishing..." : "Unpublish" }}
+              </button>
+            </div>
+            <p v-if="publishError" class="text-red-400 text-xs mt-2">{{ publishError }}</p>
+          </div>
+
           <!-- Combined Cue Thumbnails -->
           <div
             v-if="
@@ -78,7 +111,10 @@
       </div>
 
       <!-- Image Section -->
-      <div class="flex-1 overflow-y-auto flex flex-col relative p-2" style="height: 100vh; max-height: 100vh;">
+      <div
+        class="flex-1 overflow-y-auto flex flex-col relative p-2"
+        style="height: 100vh; max-height: 100vh"
+      >
         <!-- Loading Indicator -->
         <div
           v-if="allImagesLoading && designCues.length > 0"
@@ -96,7 +132,7 @@
         <template v-if="viewMode === 'regular' && designCues.length > 0">
           <div
             class="flex items-center justify-center w-full overflow-clip cursor-pointer image-gradient-bg"
-            style="height: 90vh; max-height: 90vh; min-height: 90vh;"
+            style="height: 90vh; max-height: 90vh; min-height: 90vh"
             @click="openModal(getModalImage(getRawDetailImage(selectedCue, 0)))"
           >
             <NuxtImg
@@ -122,10 +158,12 @@
         </template>
 
         <!-- Past Cue Images -->
-        <template v-else-if="viewMode === 'past' && pastCues.length > 0 && selectedPastCueIndex !== null">
+        <template
+          v-else-if="viewMode === 'past' && pastCues.length > 0 && selectedPastCueIndex !== null"
+        >
           <div
             class="flex items-center justify-center w-full overflow-clip cursor-pointer image-gradient-bg"
-            style="height: 90vh; max-height: 90vh; min-height: 90vh;"
+            style="height: 90vh; max-height: 90vh; min-height: 90vh"
             @click="openModal(getModalImage(getRawPastCueImage(pastCues[selectedPastCueIndex])))"
           >
             <NuxtImg
@@ -143,13 +181,21 @@
             v-for="(pastCue, index) in pastCues"
             :key="`past-main-${index}`"
             class="flex items-center justify-center w-full overflow-clip cursor-pointer image-gradient-bg"
-            :style="index === 0 ? 'height: 90vh; max-height: 90vh; min-height: 90vh;' : 'margin-top: 0.5rem;'"
+            :style="
+              index === 0
+                ? 'height: 90vh; max-height: 90vh; min-height: 90vh;'
+                : 'margin-top: 0.5rem;'
+            "
             @click="openModal(getModalImage(getRawPastCueImage(pastCue)))"
           >
             <NuxtImg
               :src="getPastCueImage(pastCue)"
               :alt="design.title"
-              :class="index === 0 ? 'h-full w-auto object-contain' : 'h-auto w-full max-h-[90vh] object-contain'"
+              :class="
+                index === 0
+                  ? 'h-full w-auto object-contain'
+                  : 'h-auto w-full max-h-[90vh] object-contain'
+              "
               loading="eager"
             />
           </div>
@@ -205,23 +251,37 @@
   const route = useRoute();
   const router = useRouter();
   const designId = route.params.id;
-  
-  // Parse cueId from URL path (e.g., /design/ivory-crown/1234)
-  const pathParts = route.path.split('/').filter(Boolean);
-  const cueIdFromUrl = pathParts.length === 3 
-    ? pathParts[2] // Keep as string to handle both numeric IDs and past cue IDs
-    : null;
 
-  const { getDesignById, getCuesByDesignId, getPastCuesByDesignId, sortCues, getOptimizedImageUrl, loading, designs } = useCues();
+  // Parse cueId from URL path (e.g., /design/ivory-crown/1234)
+  const pathParts = route.path.split("/").filter(Boolean);
+  const cueIdFromUrl =
+    pathParts.length === 3
+      ? pathParts[2] // Keep as string to handle both numeric IDs and past cue IDs
+      : null;
+
+  const {
+    getDesignById,
+    getCuesByDesignId,
+    getPastCuesByDesignId,
+    sortCues,
+    getOptimizedImageUrl,
+    loading,
+    designs,
+    publishCue,
+    unpublishCue,
+  } = useCues();
+  const { isAuthenticated } = useAuth();
 
   const design = ref(null);
   const designCues = ref([]);
   const pastCues = ref([]);
   const selectedCueId = ref(null);
   const selectedPastCueIndex = ref(null);
-  const viewMode = ref('regular'); // 'regular' or 'past'
+  const viewMode = ref("regular"); // 'regular' or 'past'
   const error = ref(false);
   const modalImage = ref(null);
+  const publishing = ref(false);
+  const publishError = ref("");
 
   // Track loading state for each image
   const loadedImages = ref(new Set());
@@ -235,14 +295,14 @@
 
   // Helper to get raw detail image URL (handles both array and object formats)
   const getRawDetailImage = (cue, index) => {
-    if (!cue?.images?.details) return '';
+    if (!cue?.images?.details) return "";
     const details = cue.images.details;
     // Array format (Supabase)
     if (Array.isArray(details)) {
-      return details[index] || '';
+      return details[index] || "";
     }
     // Object format (old static data with 1-indexed keys)
-    return details[index + 1] || '';
+    return details[index + 1] || "";
   };
 
   // Get optimized detail image for display (1200px for retina)
@@ -259,19 +319,19 @@
 
   // Helper to get raw past cue image URL
   const getRawPastCueImage = (pastCue) => {
-    if (!pastCue) return '';
+    if (!pastCue) return "";
     // Supabase format: images.main contains full URL
     if (pastCue.images?.main) {
       return pastCue.images.main;
     }
     // Backwards compatible format: image property with relative path
     if (pastCue.image) {
-      if (pastCue.image.startsWith('http')) {
+      if (pastCue.image.startsWith("http")) {
         return pastCue.image;
       }
-      return pastCue.image.startsWith('/') ? pastCue.image : `/${pastCue.image}`;
+      return pastCue.image.startsWith("/") ? pastCue.image : `/${pastCue.image}`;
     }
-    return '';
+    return "";
   };
 
   // Get optimized past cue image for display (800px for detail view)
@@ -305,6 +365,47 @@
     return designCues.value.find((cue) => cue.id === selectedCueId.value) || designCues.value[0];
   });
 
+  // Check if current cue is unpublished
+  const isUnpublished = computed(() => {
+    return selectedCue.value && selectedCue.value.published === false;
+  });
+
+  // Publish the current cue
+  const handlePublish = async () => {
+    if (!selectedCue.value) return;
+    publishing.value = true;
+    publishError.value = "";
+    try {
+      await publishCue(selectedCue.value.id);
+      // Update local state
+      const cue = designCues.value.find((c) => c.id === selectedCue.value.id);
+      if (cue) cue.published = true;
+    } catch (e) {
+      console.error("Publish error:", e);
+      publishError.value = e.message;
+    } finally {
+      publishing.value = false;
+    }
+  };
+
+  // Unpublish the current cue
+  const handleUnpublish = async () => {
+    if (!selectedCue.value) return;
+    publishing.value = true;
+    publishError.value = "";
+    try {
+      await unpublishCue(selectedCue.value.id);
+      // Update local state
+      const cue = designCues.value.find((c) => c.id === selectedCue.value.id);
+      if (cue) cue.published = false;
+    } catch (e) {
+      console.error("Unpublish error:", e);
+      publishError.value = e.message;
+    } finally {
+      publishing.value = false;
+    }
+  };
+
   // Handle individual image load
   const onImageLoad = (imageIndex) => {
     loadedImages.value.add(imageIndex);
@@ -313,7 +414,7 @@
   // Select regular cue
   const selectRegularCue = (cueId) => {
     selectedCueId.value = cueId;
-    viewMode.value = 'regular';
+    viewMode.value = "regular";
     selectedPastCueIndex.value = null;
     loadedImages.value.clear();
     // Update URL with cue ID
@@ -323,7 +424,7 @@
   // Select past cue
   const selectPastCue = (index) => {
     selectedPastCueIndex.value = index;
-    viewMode.value = 'past';
+    viewMode.value = "past";
     selectedCueId.value = null;
     // Update URL with past cue ID
     navigateTo(`/design/${designId}/${pastCues.value[index].id}`, { replace: true });
@@ -348,27 +449,28 @@
       if (designCues.value.length > 0) {
         if (cueIdFromUrl) {
           const numericId = parseInt(cueIdFromUrl);
-          const cueExists = !isNaN(numericId) && designCues.value.find((cue) => cue.id === numericId);
+          const cueExists =
+            !isNaN(numericId) && designCues.value.find((cue) => cue.id === numericId);
           if (cueExists) {
             selectedCueId.value = numericId;
-            viewMode.value = 'regular';
+            viewMode.value = "regular";
           } else {
             const pastCueIndex = pastCues.value.findIndex(
               (pastCue) => String(pastCue.id) === cueIdFromUrl
             );
             if (pastCueIndex !== -1) {
               selectedPastCueIndex.value = pastCueIndex;
-              viewMode.value = 'past';
+              viewMode.value = "past";
               selectedCueId.value = null;
             } else {
               selectedCueId.value = designCues.value[0].id;
-              viewMode.value = 'regular';
+              viewMode.value = "regular";
               navigateTo(`/design/${designId}/${designCues.value[0].id}`, { replace: true });
             }
           }
         } else {
           selectedCueId.value = designCues.value[0].id;
-          viewMode.value = 'regular';
+          viewMode.value = "regular";
         }
       } else if (pastCues.value.length > 0) {
         if (cueIdFromUrl) {
@@ -383,7 +485,7 @@
         } else {
           selectedPastCueIndex.value = 0;
         }
-        viewMode.value = 'past';
+        viewMode.value = "past";
       } else {
         error.value = true;
       }
@@ -393,11 +495,15 @@
   };
 
   // Watch for data to load, then initialize
-  watch([loading, designs], ([newLoading, newDesigns]) => {
-    if (!newLoading && newDesigns.length > 0 && !design.value) {
-      initializeDesign();
-    }
-  }, { immediate: true });
+  watch(
+    [loading, designs],
+    ([newLoading, newDesigns]) => {
+      if (!newLoading && newDesigns.length > 0 && !design.value) {
+        initializeDesign();
+      }
+    },
+    { immediate: true }
+  );
 
   // Set page title
   useHead({
