@@ -97,7 +97,7 @@ export default function useCues() {
     return cues.value.filter((cue) => cue.design_id === designId && !cue.is_past_cue);
   };
 
-  // Sort cues: highlighted first, then by ID descending
+  // Sort cues: highlighted first, then by upload date descending (newest first)
   const sortCues = (cuesArray) => {
     return [...cuesArray].sort((a, b) => {
       const aHighlight = a.highlight ? 1 : 0;
@@ -105,7 +105,7 @@ export default function useCues() {
       if (aHighlight !== bHighlight) {
         return bHighlight - aHighlight;
       }
-      return b.id - a.id;
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
     });
   };
 
@@ -216,15 +216,60 @@ export default function useCues() {
 
     const { width = 1200, quality = 80 } = options;
 
+    // Separate base URL from any existing query params (e.g. cache-buster ?v=...)
+    const [baseUrl, existingQuery] = url.split("?");
+
     // Convert from /object/public/ to /render/image/public/
-    const transformedUrl = url.replace(
+    const transformedBase = baseUrl.replace(
       "/storage/v1/object/public/",
       "/storage/v1/render/image/public/"
     );
 
-    // Add transformation parameters
-    // resize=contain ensures proportional scaling without cropping
-    return `${transformedUrl}?width=${width}&quality=${quality}&resize=contain`;
+    // Build params: resize settings first, then any existing params so cache-busters are preserved
+    const params = new URLSearchParams();
+    params.set("width", width);
+    params.set("quality", quality);
+    params.set("resize", "contain");
+    if (existingQuery) {
+      new URLSearchParams(existingQuery).forEach((v, k) => params.set(k, v));
+    }
+
+    return `${transformedBase}?${params.toString()}`;
+  };
+
+  // Returns designs ordered by most recently *uploaded* published cue (created_at),
+  // split into main vs ICCS. Using created_at rather than cue serial number because
+  // serial numbers reflect when the physical cue was made, not when it was added to
+  // the site — an old cue uploaded today should push its design to the top.
+  const getOrderedDesignSections = () => {
+    const main = [];
+    const iccs = [];
+
+    for (const design of designs.value) {
+      const publishedCues = cues.value.filter(
+        (c) => c.design_id === design.id && !c.is_past_cue && c.published
+      );
+      if (publishedCues.length === 0) continue;
+
+      const latestUpload = Math.max(
+        ...publishedCues.map((c) => new Date(c.created_at).getTime())
+      );
+      const entry = { id: design.id, latestUpload };
+
+      if (design.is_iccs) {
+        iccs.push(entry);
+      } else {
+        main.push(entry);
+      }
+    }
+
+    main.sort((a, b) => b.latestUpload - a.latestUpload);
+    iccs.sort((a, b) => b.latestUpload - a.latestUpload);
+
+    return {
+      main: main.map((d) => d.id),
+      iccs: iccs.map((d) => d.id),
+    };
   };
 
   // Refresh data from Supabase
@@ -293,6 +338,7 @@ export default function useCues() {
     getPastCuesByDesignId,
     getImageUrl,
     getOptimizedImageUrl,
+    getOrderedDesignSections,
     sortCues,
     refresh,
     publishCue,

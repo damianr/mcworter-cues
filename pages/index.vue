@@ -1,11 +1,6 @@
 <template>
   <!-- Hero Section -->
   <div class="relative overflow-hidden">
-    <!-- Video Background -->
-    <!-- <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
-      <source src="/images/hero-vid.mov" type="video/mp4" />
-    </video> -->
-
     <!-- Content -->
     <div
       class="relative flex flex-col items-center justify-center bg-gradient-to-b from-[rgba(0,0,0,.9)] via-[rgba(0,0,0,.5)] to-[rgba(0,0,0,0)] p-8 pt-24 pb-24"
@@ -27,7 +22,8 @@
 
   <!-- Section One Cues -->
   <CueSection
-    :design-ids="['regal', 'florentine', 'venetian', 'victorian-crown', 'pinnacle']"
+    v-if="sections.one.length > 0"
+    :design-ids="sections.one"
     wrapper-class="max-w-[2200px] mx-auto"
   />
 
@@ -50,13 +46,8 @@
 
   <!-- Section Two Cues -->
   <CueSection
-    :design-ids="[
-      'royal',
-      'silver-smoke',
-      'points-interrupted',
-      'six-points',
-      'ivory-crown',
-    ]"
+    v-if="sections.two.length > 0"
+    :design-ids="sections.two"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
   />
@@ -71,36 +62,31 @@
       steady refinement, an artist growing more confident in letting the materials and form speak
       for themselves.
     </p>
-
-    <!-- <NuxtLink
-      to="/evolution"
-      class="inline-block text-ink-100 hover:text-ink transition-colors underline underline-offset-4"
-    >
-      View the evolution →
-    </NuxtLink> -->
   </div>
 
   <!-- Section Three Cues -->
   <CueSection
-    :design-ids="['deco', 'anniversary', 'engrave', 'aztec']"
+    v-if="sections.three.length > 0"
+    :design-ids="sections.three"
     add-bottom-margin
     wrapper-class="max-w-[2200px] mx-auto"
   />
 
   <!-- ICCS Section -->
-  <div class="py-24 md:py-32 px-4 md:px-12 text-center max-w-[1400px] mx-auto">
-    <SilverTitle title="ICCS" class="mb-6" />
-    <p class="text-ink-100 font-light max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8">
-      The International Cue Collectors Show is an organization that produces a semi annual event featuring exceptional cues from master craftsmen around the world. These Cues were created for past ICCS shows.
-    </p>
-  </div>
+  <template v-if="sections.iccs.length > 0">
+    <div class="py-24 md:py-32 px-4 md:px-12 text-center max-w-[1400px] mx-auto">
+      <SilverTitle title="ICCS" class="mb-6" />
+      <p class="text-ink-100 font-light max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8">
+        The International Cue Collectors Show is an organization that produces a semi annual event featuring exceptional cues from master craftsmen around the world. These Cues were created for past ICCS shows.
+      </p>
+    </div>
 
-  <!-- ICCS Cues -->
-  <CueSection
-    :design-ids="['map', 'feather']"
-    add-bottom-margin
-    wrapper-class="max-w-[2200px] mx-auto"
-  />
+    <CueSection
+      :design-ids="sections.iccs"
+      add-bottom-margin
+      wrapper-class="max-w-[2200px] mx-auto"
+    />
+  </template>
 
   <!-- Past Cues Section -->
   <div v-if="pastCues.length > 0" class="py-24 md:py-48 px-4 md:px-12 max-w-[2200px] mx-auto">
@@ -155,65 +141,51 @@
 </template>
 
 <script setup>
-  const { getAllPastCues, getDesignById, getOptimizedImageUrl, loading } = useCues();
+  const { getAllPastCues, getDesignById, getOptimizedImageUrl, getOrderedDesignSections } = useCues();
 
-  // Design IDs that are already displayed in CueSection components
-  const displayedDesignIds = [
-    "regal",
-    "florentine",
-    "venetian",
-    "victorian-crown",
-    "pinnacle",
-    "royal",
-    "silver-smoke",
-    "points-interrupted",
-    "six-points",
-    "ivory-crown",
-    "deco",
-    "anniversary",
-    "engrave",
-    "aztec",
-    "map",
-    "feather",
-  ];
-
-  // Filter past cues to only show those whose design isn't already displayed
-  const pastCues = computed(() => {
-    const allPastCues = getAllPastCues();
-    return allPastCues.filter((cue) => !displayedDesignIds.includes(cue.designId));
+  // Split non-ICCS designs into 3 roughly equal sections ordered by most recent cue.
+  // ICCS designs are always pinned to the bottom regardless of recency.
+  const sections = computed(() => {
+    const { main, iccs } = getOrderedDesignSections();
+    const total = main.length;
+    const s1 = Math.ceil(total / 3);
+    const s2 = Math.ceil((total - s1) / 2);
+    return {
+      one: main.slice(0, s1),
+      two: main.slice(s1, s1 + s2),
+      three: main.slice(s1 + s2),
+      iccs,
+    };
   });
 
-  // Helper to get past cue image URL (optimized for thumbnails)
+  // All design IDs currently shown in CueSections (used to filter past cues)
+  const allDisplayedIds = computed(() => [
+    ...sections.value.one,
+    ...sections.value.two,
+    ...sections.value.three,
+    ...sections.value.iccs,
+  ]);
+
+  // Past cues whose design isn't already shown as a regular cue section
+  const pastCues = computed(() => {
+    return getAllPastCues().filter((cue) => !allDisplayedIds.value.includes(cue.designId));
+  });
+
   const getPastCueImage = (pastCue) => {
     if (!pastCue) return '';
     let url = '';
-    // Supabase format: images.main contains full URL
     if (pastCue.images?.main) {
       url = pastCue.images.main;
+    } else if (pastCue.image) {
+      url = pastCue.image.startsWith('http') ? pastCue.image
+        : pastCue.image.startsWith('/') ? pastCue.image
+        : `/${pastCue.image}`;
     }
-    // Backwards compatible format: image property
-    else if (pastCue.image) {
-      if (pastCue.image.startsWith('http')) {
-        url = pastCue.image;
-      } else {
-        url = pastCue.image.startsWith('/') ? pastCue.image : `/${pastCue.image}`;
-      }
-    }
-    // Optimize: resize to 400px wide (thumbnails display at ~200px, 2x for retina)
     return getOptimizedImageUrl(url, { width: 400, quality: 80 });
   };
 
   const selectedImage = ref(null);
-
-  const openModal = (imageUrl) => {
-    selectedImage.value = imageUrl;
-  };
-
-  const closeModal = () => {
-    selectedImage.value = null;
-  };
-
-  const navigateToDesign = (designId) => {
-    navigateTo(`/design/${designId}`);
-  };
+  const openModal = (imageUrl) => { selectedImage.value = imageUrl; };
+  const closeModal = () => { selectedImage.value = null; };
+  const navigateToDesign = (designId) => { navigateTo(`/design/${designId}`); };
 </script>

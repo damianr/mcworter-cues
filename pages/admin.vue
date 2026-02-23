@@ -203,18 +203,76 @@
             </div>
           </div>
 
-          <!-- Generate Button -->
-          <button
-            @click="generateAndSave"
-            :disabled="saving || !canSave"
-            class="w-full py-3 bg-ink text-bg font-medium rounded-lg hover:bg-ink-100 transition-colors disabled:opacity-50"
-          >
-            {{ saving ? "Saving..." : "Generate & Save Cue" }}
-          </button>
-
-          <p v-if="saveError" class="text-red-400 text-sm">{{ saveError }}</p>
-          <p v-if="saveSuccess" class="text-green-400 text-sm">Cue saved successfully!</p>
         </div>
+
+        <!-- Row 5: Additional Custom Images -->
+        <div class="space-y-4">
+          <div class="flex justify-between items-center">
+            <div>
+              <h2 class="text-lg font-medium">Additional Images (Optional)</h2>
+              <p class="text-xs text-ink-200">Add close-ups or custom images that will appear after the generated ones</p>
+            </div>
+            <button
+              v-if="additionalImages.length > 0"
+              @click="clearAdditionalImages"
+              class="text-xs text-ink-100 hover:text-ink underline"
+            >
+              Clear All
+            </button>
+          </div>
+
+          <div
+            class="border-2 border-dashed border-ink-200 rounded-lg p-6 text-center cursor-pointer hover:border-ink transition-colors"
+            @click="triggerAdditionalFileInput"
+            @dragover.prevent
+            @drop.prevent="handleAdditionalDrop"
+          >
+            <input
+              ref="additionalFileInput"
+              type="file"
+              accept="image/*"
+              multiple
+              class="hidden"
+              @change="handleAdditionalFileSelect"
+            />
+            <p class="text-ink-100">Click or drag to add images (multiple allowed)</p>
+          </div>
+
+          <!-- Additional Images Preview Grid -->
+          <div v-if="additionalImages.length > 0" class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div
+              v-for="(img, index) in additionalImages"
+              :key="index"
+              class="relative bg-bg-100 rounded-lg p-2 group"
+            >
+              <img
+                :src="img.preview"
+                alt="Additional image"
+                class="w-full h-auto rounded cursor-pointer"
+                @click="openAdditionalPreviewModal(index)"
+              />
+              <button
+                @click="removeAdditionalImage(index)"
+                class="absolute top-1 right-1 w-6 h-6 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-sm"
+              >
+                ×
+              </button>
+              <p class="text-xs text-ink-200 mt-1">details/{{ 2 + index }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Generate Button -->
+        <button
+          @click="generateAndSave"
+          :disabled="saving || !canSave"
+          class="w-full py-3 bg-ink text-bg font-medium rounded-lg hover:bg-ink-100 transition-colors disabled:opacity-50"
+        >
+          {{ saving ? "Saving..." : "Generate & Save Cue" }}
+        </button>
+
+        <p v-if="saveError" class="text-red-400 text-sm">{{ saveError }}</p>
+        <p v-if="saveSuccess" class="text-green-400 text-sm">Cue saved successfully!</p>
       </div>
     </div>
 
@@ -268,9 +326,11 @@
   const imageUrl = ref("");
   const landmarks = ref([]);
   const imageDimensions = ref({ width: 0, height: 0 });
+  const additionalImages = ref([]); // { file: File, preview: string }[]
 
   // Canvas refs
   const fileInput = ref(null);
+  const additionalFileInput = ref(null);
   const imageContainer = ref(null);
   const annotationImage = ref(null);
   const listCanvas1 = ref(null);
@@ -342,6 +402,45 @@
     landmarks.value = [];
     saveSuccess.value = false;
     saveError.value = "";
+  };
+
+  // Additional images handlers
+  const triggerAdditionalFileInput = () => {
+    additionalFileInput.value?.click();
+  };
+
+  const handleAdditionalFileSelect = (event) => {
+    const files = Array.from(event.target.files || []);
+    addAdditionalImages(files);
+    event.target.value = ''; // Reset input
+  };
+
+  const handleAdditionalDrop = (event) => {
+    const files = Array.from(event.dataTransfer.files || []).filter(f => f.type.startsWith('image/'));
+    addAdditionalImages(files);
+  };
+
+  const addAdditionalImages = (files) => {
+    files.forEach(file => {
+      additionalImages.value.push({
+        file,
+        preview: URL.createObjectURL(file),
+      });
+    });
+  };
+
+  const removeAdditionalImage = (index) => {
+    URL.revokeObjectURL(additionalImages.value[index].preview);
+    additionalImages.value.splice(index, 1);
+  };
+
+  const clearAdditionalImages = () => {
+    additionalImages.value.forEach(img => URL.revokeObjectURL(img.preview));
+    additionalImages.value = [];
+  };
+
+  const openAdditionalPreviewModal = (index) => {
+    previewModalImage.value = additionalImages.value[index].preview;
   };
 
   const onImageLoad = () => {
@@ -629,19 +728,36 @@
       const cueIdNum = parseInt(cueId.value);
       const basePath = `${cueIdNum}`;
 
-      // Upload images to Supabase Storage
-      const uploads = await Promise.all([
+      // Upload generated images to Supabase Storage
+      await Promise.all([
         uploadImage($supabase, `${basePath}/list/0.png`, listBlob1),
         uploadImage($supabase, `${basePath}/list/1.png`, listBlob2),
         uploadImage($supabase, `${basePath}/details/0.png`, detailBlob1),
         uploadImage($supabase, `${basePath}/details/1.png`, detailBlob2),
       ]);
 
+      // Upload additional images
+      const additionalUploads = await Promise.all(
+        additionalImages.value.map(async (img, index) => {
+          const detailIndex = 2 + index; // Start after generated details (0, 1)
+          const ext = img.file.name.split('.').pop() || 'png';
+          const path = `${basePath}/details/${detailIndex}.${ext}`;
+          await uploadImage($supabase, path, img.file);
+          return path;
+        })
+      );
+
       // Get public URLs
       const baseUrl = `https://gphhckptzkwryjjjcltk.supabase.co/storage/v1/object/public/cue-images`;
+      const detailUrls = [
+        `${baseUrl}/${basePath}/details/0.png`,
+        `${baseUrl}/${basePath}/details/1.png`,
+        ...additionalUploads.map(path => `${baseUrl}/${path}`),
+      ];
+      
       const images = {
         list: [`${baseUrl}/${basePath}/list/0.png`, `${baseUrl}/${basePath}/list/1.png`],
-        details: [`${baseUrl}/${basePath}/details/0.png`, `${baseUrl}/${basePath}/details/1.png`],
+        details: detailUrls,
       };
 
       // Insert cue record (unpublished by default for preview)
@@ -664,6 +780,7 @@
         imageUrl.value = "";
         landmarks.value = [];
         cueId.value = "";
+        clearAdditionalImages();
         saveSuccess.value = false;
       }, 2000);
     } catch (e) {
@@ -680,9 +797,20 @@
     });
   };
 
-  const uploadImage = async ($supabase, path, blob) => {
-    const { error } = await $supabase.storage.from("cue-images").upload(path, blob, {
-      contentType: "image/png",
+  const uploadImage = async ($supabase, path, fileOrBlob) => {
+    // Determine content type based on file extension or use default
+    const ext = path.split('.').pop()?.toLowerCase();
+    const contentTypes = {
+      png: 'image/png',
+      jpg: 'image/jpeg',
+      jpeg: 'image/jpeg',
+      gif: 'image/gif',
+      webp: 'image/webp',
+    };
+    const contentType = contentTypes[ext] || fileOrBlob.type || 'image/png';
+    
+    const { error } = await $supabase.storage.from("cue-images").upload(path, fileOrBlob, {
+      contentType,
       upsert: true,
     });
 
