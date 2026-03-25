@@ -9,13 +9,14 @@
           <!-- Claims to Fame with Image -->
           <div class="flex flex-col md:flex-row gap-6 md:gap-8">
             <!-- Jerry's Image -->
-            <div class="flex-shrink-0 flex justify-center md:justify-start">
+            <div class="flex-shrink-0 flex flex-col items-center md:items-start">
               <NuxtImg
-                src="/images/jerry.jpg"
+                src="/images/jerry-playing.jpeg"
                 alt="Jerry McWorter"
                 class="w-64 h-64 object-cover rounded-lg aspect-square"
                 loading="lazy"
               />
+              <span class="text-[10px] text-ink-100/40 mt-1">Chris Reinhold Photography</span>
             </div>
 
             <!-- Accolades Content -->
