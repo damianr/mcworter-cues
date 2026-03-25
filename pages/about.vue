@@ -86,7 +86,7 @@
               category.
             </p>
             <!-- Magic Castle Videos -->
-            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
+            <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
               <!-- From Magic Castle to Master Cues -->
               <div>
                 <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
@@ -108,6 +108,20 @@
                     class="absolute inset-0 w-full h-full"
                     src="https://www.youtube.com/embed/ttTy9DbI71E"
                     title="Sneaking Into Pool Halls & Learning the Hard Way"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+              <!-- Interview Part 3 -->
+              <div class="md:col-start-1 md:col-end-3 md:mx-auto md:w-1/2 lg:col-auto lg:w-full">
+                <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
+                  <iframe
+                    class="absolute inset-0 w-full h-full"
+                    src="https://www.youtube.com/embed/W4mW20AUWo8?si=lI4Ppz0U-rq9q_4l"
+                    title="YouTube video player"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerpolicy="strict-origin-when-cross-origin"
