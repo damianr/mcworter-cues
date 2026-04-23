@@ -260,6 +260,65 @@
         </div>
       </div>
 
+      <!-- Pool Instruction Section -->
+      <div class="w-full mt-12 md:mt-16 space-y-8 md:space-y-12">
+        <SilverTitle title="Pool Instruction" class="mb-6 md:mb-8" />
+        <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
+          <div class="flex flex-col items-center">
+            <div class="relative w-full max-w-[267px] bg-black rounded overflow-hidden" style="padding-bottom: 177.78%">
+              <iframe
+                class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/YevdXc_od8w"
+                title="Pool Instruction"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="relative w-full max-w-[267px] bg-black rounded overflow-hidden" style="padding-bottom: 177.78%">
+              <iframe
+                class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/7knlPqrcp0I"
+                title="Pool Instruction"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="relative w-full max-w-[267px] bg-black rounded overflow-hidden" style="padding-bottom: 177.78%">
+              <iframe
+                class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/zrTiRtlLC-Q"
+                title="Pool Instruction"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="relative w-full max-w-[267px] bg-black rounded overflow-hidden" style="padding-bottom: 177.78%">
+              <iframe
+                class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/bN7xgWx_WhE"
+                title="Pool Instruction"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Footer -->
       <div class="border-t border-ink-100/20 pt-6 mt-12 md:mt-16">
         <p class="text-ink-200 font-mono text-xs md:text-sm text-center">
