@@ -58,7 +58,7 @@
   <div class="py-24 md:py-32 px-4 md:px-12 text-center max-w-[1400px] mx-auto">
     <SilverTitle title="The Evolution" class="mb-6" />
     <p class="text-ink-100 font-light max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8">
-      Over the past thirty years, Jerry McWorter has honed a design language defined by balance,
+      For nearly 40 years, Jerry McWorter has honed a design language defined by balance,
       simplicity, and feel. What started as a quest for perfect play has matured into an art of
       proportion and flow, where every line and detail exists for a reason. His evolution shows a
       steady refinement, an artist growing more confident in letting the materials and form speak
