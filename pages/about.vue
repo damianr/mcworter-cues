@@ -190,7 +190,7 @@
 
       <!-- Interviews and Podcasts Section -->
       <div class="w-full mt-12 md:mt-16 space-y-8 md:space-y-12">
-        <SilverTitle title="Interviews and Podcasts" class="mb-6 md:mb-8" />
+        <SilverTitle title="Interviews, Podcasts and Commentary" class="mb-6 md:mb-8" />
         <div class="space-y-8 md:space-y-12">
           <!-- Landscape Videos Row -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
@@ -225,6 +225,41 @@
             </div>
           </div>
 
+          <!-- Crossroad Cues Interview -->
+          <div class="max-w-2xl mx-auto">
+            <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
+              <iframe
+                class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/NrKPpV804XQ"
+                title="Magic, Music & Pool: The Ultimate Creator's Journey — Jerry McWorter on Crossroad Cues"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- Featured Commentary Video -->
+          <div class="max-w-2xl mx-auto">
+            <div class="relative w-full bg-black rounded overflow-hidden" style="padding-bottom: 56.25%">
+              <iframe
+                class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/jo_7NmvrphE"
+                title="Jerry McWorter & Efren Reyes — Accu-Stats Commentary (1998)"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <p class="text-ink-100 text-sm md:text-base leading-relaxed mt-4 text-center">
+              This is a match Jerry did for Accu-Stats Video Production back in 1998. Jerry was able
+              to persuade the living legend Efren Reyes to join him in the commentary booth. Truly a
+              “one of a kind”!
+            </p>
+          </div>
+
           <!-- Portrait Videos Row -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
             <!-- Craftsmanship in Action -->
@@ -255,65 +290,6 @@
                   allowfullscreen="true"
                 ></iframe>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pool Instruction Section -->
-      <div class="w-full mt-12 md:mt-16 space-y-8 md:space-y-12">
-        <SilverTitle title="Pool Instruction" class="mb-6 md:mb-8" />
-        <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
-          <div class="flex flex-col items-center">
-            <div class="relative w-full max-w-[267px] bg-black rounded overflow-hidden" style="padding-bottom: 177.78%">
-              <iframe
-                class="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/YevdXc_od8w"
-                title="Pool Instruction"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-            </div>
-          </div>
-          <div class="flex flex-col items-center">
-            <div class="relative w-full max-w-[267px] bg-black rounded overflow-hidden" style="padding-bottom: 177.78%">
-              <iframe
-                class="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/7knlPqrcp0I"
-                title="Pool Instruction"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-            </div>
-          </div>
-          <div class="flex flex-col items-center">
-            <div class="relative w-full max-w-[267px] bg-black rounded overflow-hidden" style="padding-bottom: 177.78%">
-              <iframe
-                class="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/zrTiRtlLC-Q"
-                title="Pool Instruction"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-            </div>
-          </div>
-          <div class="flex flex-col items-center">
-            <div class="relative w-full max-w-[267px] bg-black rounded overflow-hidden" style="padding-bottom: 177.78%">
-              <iframe
-                class="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/bN7xgWx_WhE"
-                title="Pool Instruction"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
             </div>
           </div>
         </div>

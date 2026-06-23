@@ -3,15 +3,17 @@
   <div class="relative overflow-hidden">
     <!-- Content -->
     <div
-      class="relative flex flex-col items-center justify-center bg-gradient-to-b from-[rgba(0,0,0,.9)] via-[rgba(0,0,0,.5)] to-[rgba(0,0,0,0)] p-8 pt-24 pb-24"
+      class="relative flex flex-col items-center justify-center bg-gradient-to-b from-[rgba(0,0,0,.9)] via-[rgba(0,0,0,.5)] to-[rgba(0,0,0,0)] px-6 pt-16 pb-10 md:p-8 md:pt-24 md:pb-24"
     >
       <NuxtImg
         src="/images/logo-burl.png"
         alt="McWorter Cues Logo"
-        class="h-32 w-auto mb-12"
+        class="h-16 w-auto mb-6 md:h-32 md:mb-12"
         loading="lazy"
       />
-      <h1 class="text-ink text-center mb-2 md:mb-4">
+      <h1
+        class="text-ink text-center text-2xl leading-tight mb-2 md:text-[2.5rem] md:leading-[2.75rem] md:mb-4"
+      >
         A cue that actually plays as good as it looks
       </h1>
       <p class="text-ink-100 text-center font-light max-w-3xl mx-auto leading-relaxed">

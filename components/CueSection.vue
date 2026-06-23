@@ -3,7 +3,7 @@
     :class="[
       [
         'cue-vignette relative overflow-hidden flex flex-col gap-8 border-y border-bg-200 px-4 md:px-8',
-        title ? 'pt-[100px] pb-[200px]' : 'py-[200px]',
+        title ? 'pt-16 pb-24 md:pt-[100px] md:pb-[200px]' : 'py-16 md:py-[200px]',
       ],
       wrapperClass,
     ]"
@@ -20,14 +20,16 @@
       <div
         v-for="design in designs"
         :key="design.designId"
-        class="cursor-pointer mb-12 md:mb-24 last:mb-0 relative group/item"
+        class="cursor-pointer mb-4 md:mb-24 last:mb-0 relative group/item"
         :class="{
           'px-8': isFullCue,
         }"
         @click="navigateToDesign(design.designId)"
       >
         <!-- Images -->
-        <div class="flex gap-4 flex-shrink-0 rounded-md">
+        <!-- On mobile the image bleeds to the left screen edge so the cue
+             appears to continue off-screen; right spacing is preserved. -->
+        <div class="flex gap-4 flex-shrink-0 rounded-md -ml-4 w-[calc(100%+1rem)] md:ml-0 md:w-full">
           <NuxtImg
             :src="getCurrentImageSrc(design)"
             :alt="design.title"
@@ -69,32 +71,11 @@
         <!-- Content - Normal Mode -->
         <div
           v-else
-          class="absolute top-[50%] right-4 md:right-8 opacity-100 md:opacity-0 md:group-hover/item:opacity-100 md:group-hover/item:top-[40%] transition-all duration-400"
+          class="absolute top-[50%] mt-5 right-4 md:right-8 opacity-100 md:opacity-0 md:group-hover/item:opacity-100 md:group-hover/item:top-[40%] transition-all duration-400"
         >
-          <h4 class="text-sm md:text-base font-bold text-ink mb-2 leading-none">
+          <h4 class="text-xs md:text-base font-bold text-ink leading-none">
             {{ design.title }}
           </h4>
-          <div class="text-xs text-ink-200 font-mono mb-2 hidden md:block">#{{ getCurrentCue(design).id }}</div>
-          <!-- Variant Dots -->
-          <div
-            v-if="design.cues.length > 1"
-            class="flex gap-2"
-            @click.stop
-          >
-            <button
-              v-for="(cue, index) in design.cues"
-              :key="cue.id"
-              :class="[
-                'w-2 h-2 rounded-full transition-all duration-200',
-                (currentCueIndices[design.designId] || 0) === index
-                  ? 'bg-ink scale-125'
-                  : 'bg-ink-200 hover:bg-ink-100',
-              ]"
-              @mouseenter="setCueIndex(design.designId, index)"
-              @click="setCueIndex(design.designId, index)"
-              :aria-label="`Switch to variant ${index + 1}`"
-            />
-          </div>
         </div>
       </div>
     </template>

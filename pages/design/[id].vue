@@ -4,7 +4,7 @@
   >
     <div v-if="design" class="flex flex-col md:flex-row flex-1">
       <!-- description section -->
-      <div class="flex flex-col flex-1 max-w-[340px] pt-16 mr-12">
+      <div class="flex flex-col flex-1 max-w-[340px] pt-16 md:mr-12">
         <button @click="$router.back()" class="flex items-center text-ink-100 group flex-none mb-8">
           <NuxtImg
             src="/images/back-feather.png"
@@ -33,7 +33,7 @@
             "
             class="mt-8"
           >
-            <div class="flex flex-wrap gap-3">
+            <div class="flex flex-wrap gap-2 md:gap-3">
               <!-- Regular Cue Thumbnails -->
               <div
                 v-for="cue in designCues"
@@ -49,7 +49,7 @@
                 <NuxtImg
                   :src="getThumbnailImage(cue, 0)"
                   :alt="`${design.title} #${cue.id}`"
-                  class="w-20 h-20 object-cover"
+                  class="w-12 h-12 md:w-20 md:h-20 object-cover"
                   loading="lazy"
                 />
               </div>
@@ -68,7 +68,7 @@
                 <NuxtImg
                   :src="getPastCueThumbnail(pastCue)"
                   :alt="`${design.title} past cue`"
-                  class="w-20 h-20 object-cover"
+                  class="w-12 h-12 md:w-20 md:h-20 object-cover"
                   loading="lazy"
                 />
               </div>
@@ -144,9 +144,10 @@
       </div>
 
       <!-- Image Section -->
+      <!-- Mobile: flows in the normal page scroll (single scroll).
+           Desktop: independent 100vh scroll alongside the fixed description column. -->
       <div
-        class="flex-1 overflow-y-auto flex flex-col relative p-2"
-        style="height: 100vh; max-height: 100vh"
+        class="flex-1 flex flex-col relative p-2 md:overflow-y-auto md:h-screen md:max-h-screen"
       >
         <!-- Loading Indicator -->
         <div
@@ -171,7 +172,7 @@
             <NuxtImg
               :src="getDetailImage(selectedCue, 0)"
               :alt="design.title"
-              class="h-full w-auto object-contain"
+              class="h-full w-full object-cover md:w-auto md:object-contain"
               loading="eager"
               @load="onImageLoad(1)"
             />
